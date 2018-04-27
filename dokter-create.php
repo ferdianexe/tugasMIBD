@@ -1,3 +1,23 @@
+<?php
+	include ('connection/session.php');
+	  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$_SESSION['formSuccess'] ="true" ;
+		$targetPasien = $_POST['username'];
+		$date = $_POST['tanggal'];
+		$text = $_POST['catatan'];
+	  	$query = "SELECT idUser FROM users WHERE username like '$targetPasien'";
+		$result = $conn->query($query)->fetch_array();
+		$idPasien = $result['idUser'];
+		$_SESSION['waktu'] = $date;
+		$query = "INSERT INTO penanganan(idDokter,idPasien,waktuMulai,waktuSelesai,tanggal,catatan)
+				  VALUES ($id,$idPasien,now(),now()+1800,'$date','$text')
+		";
+	
+		$result= $conn->query($query);
+		header("Location:dokter-create.php");
+		exit ;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -49,7 +69,7 @@
                         </div>
 						<div class='input-box'>
 							<p>Catatan</p>
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+							<textarea class="form-control" rows="5" name="catatan" id="comment"></textarea>
 						</div>
 						<div class="login-container-form-btn">
 							<button class="login-form-btn">
@@ -57,6 +77,14 @@
 							</button>
 						</div>
 					</form>
+					<div>
+						<?php
+							if($_SESSION['formSuccess']){
+								$_SESSION['formSuccess'] = false ;
+								echo "<p> Data Sudah tersubmit </p>";
+							}
+						?>
+					</div>
 				</div>
 			</div>
 	</body>

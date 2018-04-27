@@ -8,11 +8,21 @@
          FROM users 
         WHERE username= '$username' ";
         $result = $conn->query($query)->fetch_array();
+        
         $_SESSION['namaUser'] = $result['nama'];
         $_SESSION['gender'] = $result['jenisKelamin'];
         $_SESSION['priviledge'] = $result['priviledge'];
         $_SESSION['id'] = $result['idUser'];
-        header("Location:Index.php");
+        if($result){
+            if($result['password']===$password){
+                header("Location:Index.php");
+            }else{
+                echo "password salah ";
+            }
+        }else{
+            header("Location:Login.html");
+        }
+       // header("Location:Index.php");
     }else{
         header("Location:Login.html");
     }
