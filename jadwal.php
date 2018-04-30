@@ -28,7 +28,7 @@
 			<div class="container">
 				<h3 style='padding-bottom:10px;'>Lihat Jadwal Praktek Dokter</h3>
 				<div style='width:500px;'>
-					<form method='POST' action="pemesanan.php">
+					<form method='POST' action="">
 						<div class="input-box">
 							<p>Pilih Speciality</p>
 							<select class='form-control input' name="speciality">
