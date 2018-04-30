@@ -15,15 +15,15 @@
         $_SESSION['id'] = $result['idUser'];
         if($result){
             if($result['password']===$password){
-                header("Location:Index.php");
+                header("Location: index.php");
             }else{
                 echo "password salah ";
             }
         }else{
-            header("Location:Login.html");
+            header("Location: login.html");
         }
        // header("Location:Index.php");
     }else{
-        header("Location:Login.html");
+        header("Location: login.html");
     }
  ?>
