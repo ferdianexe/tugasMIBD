@@ -16,6 +16,14 @@
                         <li <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-dokter.php")){echo 'class="active" ';}?>><a href="daftar-dokter.php">Daftar Dokter</a></li>
                         <li <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-user.php")){echo 'class="active" ';}?>><a href="daftar-user.php">Daftar User</a></li>
                         <li <?php if(stripos($_SERVER['SCRIPT_NAME'],"notifikasi.php")){echo 'class="active" ';}?>><a href="notifikasi.php">Notifikasi</a></li>
+						<li><div class="adminbutton">
+							<button class="adminstastik">Statistik</button>
+							<div class="adminstastik-content">
+   							 <a href="total-jam.php">Jam Kerja Dokter</a>
+   							 <a href="total-pasien.php">Jumlah Pasien</a>
+ 							 </div>
+							</div>
+						</li>
 					</ul>
 					<form class="navbar-form navbar-left" action="">
 						<div class="form-group">
