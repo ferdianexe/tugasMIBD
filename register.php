@@ -8,7 +8,8 @@
 			isset($_POST['username']) &&
 			isset($_POST['password'])&&
 			isset($_POST['gender'])
-		) {
+		)
+		 {
 			if ($_POST['nama'] != "" &&
 				$_POST['alamat'] != "" &&
 				$_POST['noTelp'] != "" &&

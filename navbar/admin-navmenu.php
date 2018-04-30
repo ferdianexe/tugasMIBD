@@ -24,6 +24,7 @@
  							 </div>
 							</div>
 						</li>
+						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"registration-dokter.php")){echo 'class="active" ';}?>><a href="registration-dokter.php">Registrasi Dokter</a></li>
 					</ul>
 					<form class="navbar-form navbar-left" action="">
 						<div class="form-group">

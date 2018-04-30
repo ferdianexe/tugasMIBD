@@ -1,9 +1,9 @@
 <?php
     include('connection/session.php');
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_POST['namaDokter']) &&isset($_POST['Alamat']) &&isset($_POST['telepon']) &&isset($_POST['username']) &&isset($_POST['password'])&&isset($_POST['gender'])&&isset($_POST['speciality'])&&isset($_POST['Umur'])&&isset($_POST['speciality']))
+        if (isset($_POST['namaDokter']) &&isset($_POST['Alamat']) &&isset($_POST['telepon']) &&isset($_POST['username']) &&isset($_POST['password'])&&isset($_POST['gender'])&&isset($_POST['speciality'])&&isset($_POST['Umur']))
 		 {
-			if ($_POST['namaDokter'] != "" &&$_POST['Alamat'] != "" &&$_POST['telepon'] != ""  &&$_POST['username'] != "" &&$_POST['password'] != ""&&$_POST['gender']!=""&&$_POST['speciality']!=""&&$_POST['Umur']!=""&&$_POST['speciality']!="") 
+			if ($_POST['namaDokter'] != "" &&$_POST['Alamat'] != "" &&$_POST['telepon'] != ""  &&$_POST['username'] != "" &&$_POST['password'] != ""&&$_POST['gender']!=""&&$_POST['speciality']!=""&&$_POST['Umur']!="") 
             {
                 $_SESSION['formSuccess1'] = "true" ;
                 $nama = $_POST['namaDokter'];
@@ -13,11 +13,9 @@
                 $password=$_POST['password'];
                 $noTelp = $_POST['telepon'];
                 $umur = $_POST['Umur'];
-				$speciality =$_POST['speciality'];
                 $query = "INSERT INTO users(nama,jenisKelamin,priviledge,isActive,username,alamat,password,idSpesialisasi,umur)
-					      VALUES ('$nama','$gender',2,1,'$username','$alamat','$password',$speciality,'$umur')";
-                $hasil =$conn->query($query);
-				echo mysqli_error($conn);
+					      VALUES ('$nama','$gender',2,1,'$username','$alamat','$password',1,'$umur')";
+                $conn->query($query);
                 $query = "SELECT idUser 
                           FROM users
                           where username ='$username'";
@@ -80,17 +78,8 @@
 							<input type="password" class='form-control input' name="password" placeholder="Password">
 						</div>
 						<div class="input-box">
-							<p>Speciality</p>
-							<select class='form-control input' name="speciality">
-							<option value="" disabled selected hidden>Pilih Speciality</option>
-								<?php
-									$sql = "SELECT * FROM spesialisasi";
-									$result = $conn->query($sql);
-									while ($row = $result->fetch_assoc()) {
-										echo '<option value="'.$row["idSpesialisasi"].'">'.$row["namaSpesialisasi"].'</option>';
-									}
-								?>  
-								</select>
+							<p>Nama Speciality</p>
+							<input type="text" class='form-control input' name="speciality" placeholder="nama Speciality">
                         </div>
                         <div class="input-box">
 							<p>Nomor Telepon</p>
