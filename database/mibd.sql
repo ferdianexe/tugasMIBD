@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2018 at 05:10 AM
--- Server version: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 30 Apr 2018 pada 07.16
+-- Versi Server: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jadwalpraktek`
+-- Struktur dari tabel `jadwalpraktek`
 --
 
 CREATE TABLE `jadwalpraktek` (
@@ -33,13 +33,25 @@ CREATE TABLE `jadwalpraktek` (
   `idDokter` int(11) NOT NULL,
   `waktuMulai` time NOT NULL,
   `waktuSelesai` time NOT NULL,
-  `tanggal` date NOT NULL
+  `tanggal` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `jadwalpraktek`
+--
+
+INSERT INTO `jadwalpraktek` (`idPraktek`, `idDokter`, `waktuMulai`, `waktuSelesai`, `tanggal`) VALUES
+(2, 2, '07:00:00', '10:00:00', 1),
+(3, 2, '15:00:00', '19:00:00', 2),
+(4, 2, '10:00:00', '19:00:00', 3),
+(5, 2, '10:00:00', '22:00:00', 4),
+(6, 2, '17:00:00', '23:00:00', 5),
+(7, 2, '11:00:00', '22:00:00', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nomortelepon`
+-- Struktur dari tabel `nomortelepon`
 --
 
 CREATE TABLE `nomortelepon` (
@@ -50,7 +62,7 @@ CREATE TABLE `nomortelepon` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pekerjaandokter`
+-- Struktur dari tabel `pekerjaandokter`
 --
 
 CREATE TABLE `pekerjaandokter` (
@@ -62,7 +74,7 @@ CREATE TABLE `pekerjaandokter` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penanganan`
+-- Struktur dari tabel `penanganan`
 --
 
 CREATE TABLE `penanganan` (
@@ -78,17 +90,21 @@ CREATE TABLE `penanganan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `penanganan`
+-- Dumping data untuk tabel `penanganan`
 --
 
 INSERT INTO `penanganan` (`idPenanganan`, `idDokter`, `idPasien`, `waktuMulai`, `waktuSelesai`, `tanggal`, `catatan`, `isDeleted`, `waktuPengubahan`) VALUES
 (1, 2, 1, '12:00:00', '12:30:00', '2018-04-05', 'Sakit Hati ga dapet pacar', 0, NULL),
-(2, 2, 1, '13:00:00', '13:30:00', '2018-04-07', 'Tifus', 0, '2018-04-11');
+(2, 2, 1, '13:00:00', '13:30:00', '2018-04-07', 'Tifus', 0, '2018-04-11'),
+(3, 2, 1, '13:56:58', '00:00:00', '2018-04-27', 'Sehat Walfiat', 0, NULL),
+(4, 2, 1, '13:58:05', '13:58:35', '0000-00-00', 'Ga Sehat Walfiat', 0, NULL),
+(5, 2, 1, '14:01:15', '14:19:15', '0000-00-00', 'TIFUS MODAR SIAAAA', 0, NULL),
+(6, 2, 1, '14:05:19', '14:23:19', '2018-04-27', 'BABIBUBA', 0, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `spesialisasi`
+-- Struktur dari tabel `spesialisasi`
 --
 
 CREATE TABLE `spesialisasi` (
@@ -97,16 +113,17 @@ CREATE TABLE `spesialisasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `spesialisasi`
+-- Dumping data untuk tabel `spesialisasi`
 --
 
 INSERT INTO `spesialisasi` (`idSpesialisasi`, `namaSpesialisasi`) VALUES
-(1, 'Dokter Umum');
+(1, 'Dokter Umum'),
+(2, 'Telingat WIbu Tenggorokan');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -124,7 +141,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`idUser`, `nama`, `umur`, `jenisKelamin`, `priviledge`, `isActive`, `username`, `tarif`, `alamat`, `idSpesialisasi`, `password`) VALUES
@@ -132,7 +149,8 @@ INSERT INTO `users` (`idUser`, `nama`, `umur`, `jenisKelamin`, `priviledge`, `is
 (2, 'Roy Kiyoshi', 25, 'L', 2, 1, 'RoyK', 50000, 'Jln kesalahan garam', 1, 'Royy'),
 (3, 'admin', 22, 'L', 3, 1, 'admin', 0, 'jalan kurang sehat', NULL, 'admin'),
 (4, 'Ferdi', NULL, 'L', 1, 0, 'Ferdiboy', 0, 'Kddff', NULL, 'test'),
-(5, 'UserTest', NULL, 'L', 1, 0, 'Root', 0, 'Hahay', NULL, 'root');
+(5, 'UserTest', NULL, 'L', 1, 0, 'Root', 0, 'Hahay', NULL, 'root'),
+(6, 'Emilia', 25, 'P', 2, 1, 'emili', 0, 'Jln.Shibuya Arab', 2, 'mil');
 
 --
 -- Indexes for dumped tables
@@ -186,57 +204,53 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `jadwalpraktek`
 --
 ALTER TABLE `jadwalpraktek`
-  MODIFY `idPraktek` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `idPraktek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `penanganan`
 --
 ALTER TABLE `penanganan`
-  MODIFY `idPenanganan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `idPenanganan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `spesialisasi`
 --
 ALTER TABLE `spesialisasi`
-  MODIFY `idSpesialisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `idSpesialisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
 
 --
--- Constraints for dumped tables
---
-
---
--- Constraints for table `jadwalpraktek`
+-- Ketidakleluasaan untuk tabel `jadwalpraktek`
 --
 ALTER TABLE `jadwalpraktek`
   ADD CONSTRAINT `jadwalpraktek_ibfk_1` FOREIGN KEY (`idDokter`) REFERENCES `users` (`idUser`);
 
 --
--- Constraints for table `nomortelepon`
+-- Ketidakleluasaan untuk tabel `nomortelepon`
 --
 ALTER TABLE `nomortelepon`
   ADD CONSTRAINT `nomortelepon_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
 
 --
--- Constraints for table `pekerjaandokter`
+-- Ketidakleluasaan untuk tabel `pekerjaandokter`
 --
 ALTER TABLE `pekerjaandokter`
   ADD CONSTRAINT `pekerjaandokter_ibfk_1` FOREIGN KEY (`idPenanganan`) REFERENCES `penanganan` (`idPenanganan`);
 
 --
--- Constraints for table `penanganan`
+-- Ketidakleluasaan untuk tabel `penanganan`
 --
 ALTER TABLE `penanganan`
   ADD CONSTRAINT `penanganan_ibfk_1` FOREIGN KEY (`idDokter`) REFERENCES `users` (`idUser`),
   ADD CONSTRAINT `penanganan_ibfk_2` FOREIGN KEY (`idPasien`) REFERENCES `users` (`idUser`);
 
 --
--- Constraints for table `users`
+-- Ketidakleluasaan untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`idSpesialisasi`) REFERENCES `spesialisasi` (`idSpesialisasi`);
