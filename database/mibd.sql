@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2018 at 01:28 PM
+-- Generation Time: May 01, 2018 at 01:32 PM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.1.12-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -77,8 +77,8 @@ CREATE TABLE `pekerjaandokter` (
   `idDokter` int(11) NOT NULL,
   `idPasien` int(11) NOT NULL,
   `idPenanganan` int(11) NOT NULL,
-  `waktuDaftar` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `waktuTemu` datetime NOT NULL
+  `waktuDaftar` date NOT NULL,
+  `waktuTemu` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
