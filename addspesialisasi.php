@@ -1,27 +1,21 @@
 <?php
     include('connection/session.php');
-    $query = "SELECT totalJam , kumpulanDokter.idDokter as 'dokterID',nama
-				FROM(
-						SELECT SUM(jumlah) as 'totalJam', himpunanJumlah.idDokter
-							FROM(
-									SELECT idDokter,TIMESTAMPDIFF(HOUR,waktuMulai,waktuSelesai) as 'jumlah' 
-									FROM jadwalpraktek
-								) as himpunanJumlah
-						GROUP BY himpunanJumlah.idDokter
-        			) as jumlahJamDokter
-       			right join 
-                	(
-                    	SELECT *
-                        FROM dokter
-                        
-					) as kumpulanDokter on kumpulanDokter.idDokter = jumlahJamDokter.idDokter
-					inner join 
-					(
-						SELECT nama,idUser
-						from Users	
-
-					)as kumpulanUser on kumpulanUser.idUser = kumpulanDokter.idUser";
-    $result = $conn->query($query);
+    $query = "SELECT *
+              FROM Spesialisasi
+              ";
+	$result = $conn->query($query);
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		 if(isset($_POST['newSpeciality'])){
+			 if($_POST['newSpeciality']!=""){
+				$newSpeciality = $_POST['newSpeciality'];
+				$quer = "INSERT INTO Spesialisasi(namaSpesialisasi)
+				VALUES ('$newSpeciality')";
+				$conn->query($quer);
+				header('Location:addspesialisasi.php');
+				exit();
+			 }
+		 }
+	}
 	echo mysqli_error($conn);
 ?>
 <!DOCTYPE html>
@@ -44,28 +38,35 @@
 			<div class="container">
 				<table class='table table-striped'>
 					<tr>
-						<th>idDokter</th>
-						<th>Dokter</th>
-						<th>Total Jam Perminggu</th>
+						<th>idSpesialisasi</th>
+						<th>Nama Spesialisasi</th>
 					</tr>
 							<?php
                         if ($result) {
                             while ($row=$result->fetch_array()) {
                                 echo "<tr>
-									<td>".$row['dokterID']."</td>
-									<td>".$row['nama']."</td>
-									";
-									if($row['totalJam']){
-										echo "<td>".$row['totalJam']."</td>";
-									}else{
-										echo "<td> 0 </td>";
-									}
-									echo "</tr>";
-									
+									<td>".$row['idSpesialisasi']."</td>
+									<td>".$row['namaSpesialisasi']."</td>
+									</tr>";
 							}
 						}
                     ?>
 				</table>
+				<h3 style='padding-bottom:10px;'>Tambah Speciality</h3>
+				<div style='width:500px;'>
+					<form method='POST' action="">
+						<div class="input-box">
+							<p>Nama Speciality</p>
+							<input type="text" class='form-control input' name="newSpeciality" placeholder="Nama Speciality">
+						</div>
+						<div class="login-container-form-btn">
+							<button class="login-form-btn">
+								Tambah
+							</button>
+                        </div>
+					</form>
+				</div>
+			
 			</div>
 		
 	</body>

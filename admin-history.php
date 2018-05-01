@@ -1,11 +1,27 @@
 <?php
     include('connection/session.php');
-    $query = "SELECT tabelPasien.nama as namaPasien ,tabelDokter.nama as namaDokter,waktuMulai,waktuSelesai,tanggal,catatan,isDeleted,waktuPengubahan
-			  FROM penanganan
-			  INNER JOIN users as tabelPasien on tabelPasien.idUser = penanganan.idPasien
-			  INNER JOIN users as tabelDokter on tabelDokter.idUser = penanganan.idDokter 
+    $query = " SELECT daftarDokter.nama as 'namaDokter',daftarPasien.nama as 'namaPasien',tarif,waktuMulai,waktuSelesai,tanggal,catatan,isDeleted,waktuPengubahan
+			   FROM
+				(
+					SELECT pekerjaanDokter.idPenanganan,tarif,waktuMulai,waktuSelesai,tanggal,catatan,isDeleted,waktuPengubahan,idDokter,idPasien
+			   		FROM penanganan
+			  		Inner Join pekerjaandokter on pekerjaanDokter.idPenanganan = penanganan.idPenanganan
+
+				) as daftarPenanganan
+				INNER JOIN 
+					(
+						SELECT nama,dokter.iddokter
+						FROM dokter
+						inner join users on users.idUser = dokter.idUser
+					) as daftarDokter on daftarDokter.idDokter = daftarPenanganan.idDokter
+				INNER JOIN 
+				(
+					SELECT nama,idUser
+					FROM users
+				) as daftarPasien on daftarPasien.idUser = daftarPenanganan.idPasien
 	";
-    $result = $conn->query($query);
+	$result = $conn->query($query);
+	echo mysqli_error($conn);
 
 ?>
 <!DOCTYPE html>

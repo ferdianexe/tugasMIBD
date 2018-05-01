@@ -25,6 +25,7 @@
 							</div>
 						</li>
 						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"registration-dokter.php")){echo 'class="active" ';}?>><a href="registration-dokter.php">Registrasi Dokter</a></li>
+						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"addspesialisasi.php")){echo 'class="active" ';}?>><a href="addspesialisasi.php">Tambah spesialisasi</a></li>
 					</ul>
 					<ul class='nav navbar-nav navbar-right'>
 							<li><a href='logout.php'>Logout</a></li>

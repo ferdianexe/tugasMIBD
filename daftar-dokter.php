@@ -1,10 +1,10 @@
 <?php
 	include ('connection/session.php');
-	$query = " SELECT nama,username,jenisKelamin,Alamat,tarif,tspesial.namaSpesialisasi
-	FROM users INNER JOIN spesialisasi as tspesial
-	on tspesial.idSpesialisasi = users.idSpesialisasi
-	WHERE priviledge=2";
-    $result =$conn->query($query);
+	$query = " SELECT tusers.nama as nama ,tusers.username as username,tusers.jenisKelamin as jenisKelamin,tusers.Alamat as Alamat,tspesial.namaSpesialisasi as spesialisasi,noRuangan
+	FROM dokter INNER JOIN spesialisasi as tspesial on tspesial.idSpesialisasi = dokter.idSpesialisasi
+				INNER JOIN users as tusers on dokter.idUser = tusers.idUser ";
+	$result =$conn->query($query);
+	echo mysqli_error($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +31,7 @@
 						<th>Username</th>
 						<th>Jenis Kelamin</th>
 						<th>No Ruangan</th>
-						<th>Tarif</th>
-                        <th>Shift Kerja</th>
+						<th>Shift Kerja</th>
                         <th>Alamat</th>
                         <th>Spesialisasi</th>
 					</tr>
@@ -48,11 +47,10 @@
 										<td>". $row["nama"] ."</td>
 										<td> ".$row["username"] ."</td>
 										<td> ".$jenisKelamin."</td>
-										<td> 9022 </td>
-										<td> ".$row['tarif']."</td>
+										<td> ".$row['noRuangan']."</td>
 										<td> SEHARIAN </td>
 										<td> ".$row["Alamat"]."</td>
-										<td> ".$row["namaSpesialisasi"]."</td>
+										<td> ".$row["spesialisasi"]."</td>
 								";
                             }
 						}
