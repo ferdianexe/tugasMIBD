@@ -2,16 +2,18 @@
     include('connection/session.php');
     $query = "	SELECT *
 				FROM(
-						SELECT COUNT(idPenanganan) as 'total', kumpulanDokter.nama as namaDokter
+						SELECT COUNT(pekerjaandokter.idPenanganan) as 'total', pekerjaandokter.idDokter  as 'idDokter'
 			 			FROM penanganan
-						RIGHT join 
-                		(
-                			SELECT *
-                   			FROM users
-                    		WHERE users.priviledge = 2
-                		) as kumpulanDokter on penanganan.idDokter = kumpulanDokter.idUser
+						inner join pekerjaandokter on pekerjaandokter.idPenanganan = penanganan.idPenanganan
 						GROUP by idDokter
        				 ) as ResultHimpunan
+					inner join 
+					(
+						SELECT nama as 'namaDokter',Dokter.idDokter
+						FROM Dokter inner join users on Dokter.idUser = users.idUser
+						
+
+					)as namaDokterHimp on namaDokterHimp.idDokter = resultHimpunan.idDokter
 				ORDER by Total  DESC";
     $result = $conn->query($query);
 	echo mysqli_error($conn);

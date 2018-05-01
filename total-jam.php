@@ -1,6 +1,6 @@
 <?php
     include('connection/session.php');
-    $query = "SELECT totalJam , kumpulanDokter.idUser as 'dokterID',nama
+    $query = "SELECT totalJam , kumpulanDokter.idDokter as 'dokterID',nama
 				FROM(
 						SELECT SUM(jumlah) as 'totalJam', himpunanJumlah.idDokter
 							FROM(
@@ -12,9 +12,15 @@
        			right join 
                 	(
                     	SELECT *
-                        FROM users
-                        WHERE users.priviledge = 2
-                    ) as kumpulanDokter on kumpulanDokter.idUser = jumlahJamDokter.idDokter";
+                        FROM dokter
+                        
+					) as kumpulanDokter on kumpulanDokter.idDokter = jumlahJamDokter.idDokter
+					inner join 
+					(
+						SELECT nama,idUser
+						from Users	
+
+					)as kumpulanUser on kumpulanUser.idUser = kumpulanDokter.idUser";
     $result = $conn->query($query);
 	echo mysqli_error($conn);
 ?>
