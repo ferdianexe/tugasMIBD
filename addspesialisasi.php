@@ -3,7 +3,19 @@
     $query = "SELECT *
               FROM Spesialisasi
               ";
-    $result = $conn->query($query);
+	$result = $conn->query($query);
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		 if(isset($_POST['newSpeciality'])){
+			 if($_POST['newSpeciality']!=""){
+				$newSpeciality = $_POST['newSpeciality'];
+				$quer = "INSERT INTO Spesialisasi(namaSpesialisasi)
+				VALUES ('$newSpeciality')";
+				$conn->query($quer);
+				header('Location:addspesialisasi.php');
+				exit();
+			 }
+		 }
+	}
 	echo mysqli_error($conn);
 ?>
 <!DOCTYPE html>
@@ -40,6 +52,21 @@
 						}
                     ?>
 				</table>
+				<h3 style='padding-bottom:10px;'>Tambah Speciality</h3>
+				<div style='width:500px;'>
+					<form method='POST' action="">
+						<div class="input-box">
+							<p>Nama Speciality</p>
+							<input type="text" class='form-control input' name="newSpeciality" placeholder="Nama Speciality">
+						</div>
+						<div class="login-container-form-btn">
+							<button class="login-form-btn">
+								Tambah
+							</button>
+                        </div>
+					</form>
+				</div>
+			
 			</div>
 		
 	</body>
