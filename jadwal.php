@@ -30,6 +30,20 @@
 				<div style='width:500px;'>
 					<form method='POST' action="">
 						<div class="input-box">
+							<p>Pilih Hari</p>
+							<select class='form-control input' name="hari">
+								<option value="" disabled selected hidden>Pilih Hari</option>
+								<option value="1">Senin</option>
+								<option value="2">Selasa</option>
+								<option value="3">Rabu</option>
+								<option value="4">Kamis</option>
+								<option value="5">Jumat</option>
+								<option value="6">Sabtu</option>
+								<option value="7">Minggu</option>
+								<!-- belum bisa diaplikasikan -->
+							</select>
+						</div>
+						<div class="input-box">
 							<p>Pilih Speciality</p>
 							<select class='form-control input' name="speciality">
 								<option value="" disabled selected hidden>Pilih Speciality</option>
@@ -48,22 +62,12 @@
 							<select class='form-control input' name="dokter">
 								<option value="" disabled selected hidden>Pilih Dokter</option>
 								<?php
-									$sql = "SELECT * FROM users WHERE idSpesialisasi IS NOT NULL";
+									$sql = "SELECT * FROM dokter INNER JOIN users ON dokter.idUser = users.idUser";
 									$result = $conn->query($sql);
 									while ($row = $result->fetch_assoc()) {
 										echo '<option value="'.$row["idUser"].'">'.$row["nama"].'</option>';
 									}
 								?>
-							</select>
-						</div>
-						<div class="input-box">
-							<p>Pilih Hari</p>
-							<select class='form-control input' name="hari">
-								<option value="" disabled selected hidden>Pilih Hari</option>
-								<option value="A">Senin</option>
-								<option value="B">Rabu</option>
-								<option value="C">Jumat</option>
-								<!-- belum bisa diaplikasikan -->
 							</select>
 						</div>
 						<div class="login-container-form-btn">
