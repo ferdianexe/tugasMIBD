@@ -13,18 +13,24 @@
                 $password=$_POST['password'];
                 $noTelp = $_POST['telepon'];
                 $umur = $_POST['Umur'];
-                $query = "INSERT INTO users(nama,jenisKelamin,priviledge,isActive,username,alamat,password,idSpesialisasi,umur)
-					      VALUES ('$nama','$gender',2,1,'$username','$alamat','$password',1,'$umur')";
+                $query = "INSERT INTO users(nama,jenisKelamin,priviledge,isActive,username,alamat,password,umur)
+					      VALUES ('$nama','$gender',2,1,'$username','$alamat','$password','$umur')";
                 $conn->query($query);
                 $query = "SELECT idUser 
                           FROM users
                           where username ='$username'";
                 $result = $conn->query($query)->fetch_array();
-                $idUser = $result['idUser'];
+				$idUser = $result['idUser'];
+				$speciality = $_POST['speciality'];
                 echo $idUser." ".$noTelp;
                 $query = "INSERT INTO nomortelepon(idUser,nomorTelp)
                           values ($idUser, '$noTelp')";
-                $conn->query($query);
+				$conn->query($query);
+				$query = "INSERT INTO dokter(idUser,idSpesialisasi)
+						  VALUES ('$idUser','$speciality')
+				";
+				$conn->query($query);
+				echo mysqli_error($conn);
                   header("Location:registration-dokter.php");
                 exit ;
 				
@@ -78,10 +84,21 @@
 							<input type="password" class='form-control input' name="password" placeholder="Password">
 						</div>
 						<div class="input-box">
-							<p>Nama Speciality</p>
-							<input type="text" class='form-control input' name="speciality" placeholder="nama Speciality">
-                        </div>
-                        <div class="input-box">
+							<p>Pilih Speciality</p>
+							<select class='form-control input' name="speciality">
+								<option value="" disabled selected hidden>Pilih Speciality</option>
+								
+								<?php
+									$sql = "SELECT * FROM spesialisasi";
+									$result = $conn->query($sql);
+									while ($row = $result->fetch_assoc()) {
+										echo '<option value="'.$row["idSpesialisasi"].'">'.$row["namaSpesialisasi"].'</option>';
+									}
+								?>
+							</select>
+						</div>
+
+						<div class="input-box">
 							<p>Nomor Telepon</p>
 							<input type="text" class='form-control input' name="telepon" placeholder="Telepon">
                         </div>
