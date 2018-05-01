@@ -26,12 +26,6 @@
 						</li>
 						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"registration-dokter.php")){echo 'class="active" ';}?>><a href="registration-dokter.php">Registrasi Dokter</a></li>
 					</ul>
-					<form class="navbar-form navbar-left" action="">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search" name="search">
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
 					<ul class='nav navbar-nav navbar-right'>
 							<li><a href='logout.php'>Logout</a></li>
 					</ul>
