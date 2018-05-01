@@ -2,10 +2,10 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 01, 2018 at 01:32 PM
--- Server version: 5.7.21-0ubuntu0.16.04.1
--- PHP Version: 7.1.12-1+ubuntu16.04.1+deb.sury.org+1
+-- Host: 127.0.0.1
+-- Generation Time: May 01, 2018 at 10:40 AM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -81,6 +81,14 @@ CREATE TABLE `pekerjaandokter` (
   `waktuTemu` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pekerjaandokter`
+--
+
+INSERT INTO `pekerjaandokter` (`idDokter`, `idPasien`, `idPenanganan`, `waktuDaftar`, `waktuTemu`) VALUES
+(1, 1, 1, '0000-00-00', '0000-00-00'),
+(1, 1, 2, '0000-00-00', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +130,7 @@ CREATE TABLE `spesialisasi` (
 --
 
 INSERT INTO `spesialisasi` (`idSpesialisasi`, `namaSpesialisasi`) VALUES
+(2, 'Dokter Cinta'),
 (1, 'Dokter Umum');
 
 -- --------------------------------------------------------
@@ -197,7 +206,8 @@ ALTER TABLE `penanganan`
 -- Indexes for table `spesialisasi`
 --
 ALTER TABLE `spesialisasi`
-  ADD PRIMARY KEY (`idSpesialisasi`);
+  ADD PRIMARY KEY (`idSpesialisasi`),
+  ADD UNIQUE KEY `namaSpesialisasi` (`namaSpesialisasi`);
 
 --
 -- Indexes for table `users`
@@ -231,7 +241,7 @@ ALTER TABLE `penanganan`
 -- AUTO_INCREMENT for table `spesialisasi`
 --
 ALTER TABLE `spesialisasi`
-  MODIFY `idSpesialisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idSpesialisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
