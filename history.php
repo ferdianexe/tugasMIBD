@@ -1,11 +1,13 @@
 <?php
 	include ('connection/session.php');
 	$query = "
-		SELECT waktuMulai,waktuSelesai,tanggal,catatan,tabelDokter.nama as Dokter
-		FROM penanganan
-			inner join users as tabelDokter on idPasien = tabelDokter.idUser
-		WHERE 
-			idPasien = $id
+	SELECT doc.nama as namaDokter, user.nama as namaPasien, penanganan.waktuMulai, penanganan.waktuSelesai, penanganan.tanggal, penanganan.catatan
+	FROM pekerjaandokter INNER JOIN 
+		dokter ON pekerjaandokter.idDokter = dokter.idDokter
+		INNER JOIN users as doc ON doc.idUser = dokter.idUser
+		INNER JOIN users as user ON pekerjaandokter.idPasien = user.idUser
+		INNER JOIN penanganan ON penanganan.idPenanganan = pekerjaandokter.idPenanganan
+	WHERE penanganan.isDeleted = 0
 	";
 	$result = $conn->query($query);
 	if($result){
@@ -47,7 +49,7 @@
 						if($result){
 							while($row=$result->fetch_array()){
 								echo "<tr>
-									<td> ".$row['Dokter']."</td>
+									<td> ".$row['nama']."</td>
 									<td> ".$row['waktuMulai']."</td>
 									<td> ".$row['waktuSelesai']."</td>
 									<td> ".$row['tanggal']."</td>
