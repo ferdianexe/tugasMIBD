@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2018 at 01:01 PM
+-- Generation Time: May 01, 2018 at 01:28 PM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.1.12-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -34,6 +34,13 @@ CREATE TABLE `dokter` (
   `idSpesialisasi` int(11) NOT NULL,
   `noRuangan` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`idDokter`, `idUser`, `idSpesialisasi`, `noRuangan`) VALUES
+(1, 2, 1, '55555');
 
 -- --------------------------------------------------------
 
@@ -176,7 +183,9 @@ ALTER TABLE `nomortelepon`
 -- Indexes for table `pekerjaandokter`
 --
 ALTER TABLE `pekerjaandokter`
-  ADD KEY `idPenanganan` (`idPenanganan`);
+  ADD KEY `idPenanganan` (`idPenanganan`),
+  ADD KEY `idDokter` (`idDokter`),
+  ADD KEY `idPasien` (`idPasien`);
 
 --
 -- Indexes for table `penanganan`
@@ -204,7 +213,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `idDokter` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jadwalpraktek`
@@ -257,7 +266,9 @@ ALTER TABLE `nomortelepon`
 -- Constraints for table `pekerjaandokter`
 --
 ALTER TABLE `pekerjaandokter`
-  ADD CONSTRAINT `pekerjaandokter_ibfk_1` FOREIGN KEY (`idPenanganan`) REFERENCES `penanganan` (`idPenanganan`);
+  ADD CONSTRAINT `pekerjaandokter_ibfk_1` FOREIGN KEY (`idPenanganan`) REFERENCES `penanganan` (`idPenanganan`),
+  ADD CONSTRAINT `pekerjaandokter_ibfk_2` FOREIGN KEY (`idDokter`) REFERENCES `dokter` (`idDokter`),
+  ADD CONSTRAINT `pekerjaandokter_ibfk_3` FOREIGN KEY (`idPasien`) REFERENCES `users` (`idUser`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
