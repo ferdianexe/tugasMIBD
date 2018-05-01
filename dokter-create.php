@@ -1,5 +1,6 @@
 <?php
 	include ('connection/session.php');
+	
 	  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION['formSuccess'] ="true" ;
 		$targetPasien = $_POST['username'];
@@ -15,7 +16,8 @@
 	
 		$result= $conn->query($query);
 		header("Location:dokter-create.php");
-		exit ;
+		exit();
+		//exit ;
     }
 ?>
 <!DOCTYPE html>
