@@ -32,7 +32,7 @@
                           WHERE idDokter=$idDokter AND hari=$day";
                 $result =$conn->query($query);
             }else{
-                echo "kesini";
+               
                 $query = "INSERT INTO jadwalPraktek(idDokter,waktuMulai,waktuSelesai,hari)
                           VALUES ('$idDokter','$startTime','$endTime','$day')";
                 $result =$conn->query($query);

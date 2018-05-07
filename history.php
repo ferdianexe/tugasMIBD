@@ -49,7 +49,7 @@
 						if($result){
 							while($row=$result->fetch_array()){
 								echo "<tr>
-									<td> ".$row['nama']."</td>
+									<td> ".$row['namaDokter']."</td>
 									<td> ".$row['waktuMulai']."</td>
 									<td> ".$row['waktuSelesai']."</td>
 									<td> ".$row['tanggal']."</td>
