@@ -3,22 +3,31 @@
 	
 	  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION['formSuccess'] ="true" ;
-		$targetPasien = $_POST['username'];
+		
 		$date = $_POST['tanggal'];
 		$text = $_POST['catatan'];
-	  	$query = "SELECT idUser FROM users WHERE username like '$targetPasien'";
-		$result = $conn->query($query)->fetch_array();
-		$idPasien = $result['idUser'];
-		$_SESSION['waktu'] = $date;
-		$query = "INSERT INTO penanganan(idDokter,idPasien,waktuMulai,waktuSelesai,tanggal,catatan)
-				  VALUES ($id,$idPasien,now(),now()+1800,'$date','$text')
+		$namaid =$_POST['nama'];
+		$query = "UPDATE penanganan
+				  SET waktuMulai ='now()',waktuSelesai=now()+1800,tanggal='$date',catatan='$text'
+				  WHERE idPenanganan = $namaid
+
 		";
 	
 		$result= $conn->query($query);
+		//echo mysqli_error($conn);
 		header("Location:dokter-create.php");
 		exit();
 		//exit ;
     }
+	$orderQuery = "SELECT  users.nama as nama , users.username as username ,tOrder.idPenanganan as id 
+				   FROM (
+				  		SELECT idPasien,idPenanganan FROM `pekerjaandokter` 
+						WHERE waktuTemu = DATE_FORMAT(now(),'%Y-%m-%d')
+     					) as tOrder
+				 INNER JOIN users on users.idUser = tOrder.idPasien
+				";
+	$orderResult = $conn->query($orderQuery);
+	echo mysqli_error($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,20 +55,18 @@
 				<div style='width:500px;'>
 					<form method='POST' action="">
 						<div class="input-box">
-                            <p>Nama</p>
-                            <input class="input" type="text" name="nama" placeholder="Nama">
-                            <span class="focus-input"></span>
-                            <span class="symbol-input">
-                                <i class="fa fa-address-card" aria-hidden="true"></i>
-                            </span>
-                        </div>
-						<div class="input-box">
-                            <p>Username</p>
-                            <input class="input" type="text" name="username" placeholder="Username">
-                            <span class="focus-input"></span>
-                            <span class="symbol-input">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
+                           <p>Nama</p>
+							<select class='form-control input' id="spec"   name="nama">
+								<option value="" disabled selected hidden >Username</option>
+								<?php
+									while($row=$orderResult->fetch_array()){
+										$id = $row['id'];
+										$nama = $row['nama'];
+										$usr = $row['username'];
+										echo "<option value=$id> $nama ($usr) </option>";
+									}
+								?>
+							</select>
                         </div>
 						<div class="input-box">
                             <p>Tanggal</p>
