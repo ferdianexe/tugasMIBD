@@ -14,8 +14,8 @@
 	<div class='dropdown'>
 		<button class='dropbtn'>Statistik</button>
 		<div class='dropdown-content'>
-			<a href="total-jam.php">Jam Kerja Dokter</a>
-			<a href="total-pasien.php">Jumlah Pasien</a>
+			<a href="total-jam.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"total-jam.php")){echo 'class="active" ';}?>>Jam Kerja Dokter</a>
+			<a href="total-pasien.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"total-pasien.php")){echo 'class="active" ';}?>>Jumlah Pasien</a>
 		</div>
 	</div>
 	<a href="registration-dokter.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"registration-dokter.php")){echo 'class="active" ';}?>>Registrasi Dokter</a>

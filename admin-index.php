@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php include('navbar/admin-navmenu.php')?>	
-	<div class="container">
+	<div class="my-container">
 		<h3>SELAMAT DATANG  <?php 
             if ($gender==='P') {
         	  echo "Ibu ".$namaUser." ";

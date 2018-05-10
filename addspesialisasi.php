@@ -25,18 +25,13 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-		<!-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-		<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-		<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
 			<?php include('navbar/admin-navmenu.php')?>	
-			<div class="container">
-				<table class='table table-striped'>
+			<div class="my-container">
+				<table>
 					<tr>
 						<th>idSpesialisasi</th>
 						<th>Nama Spesialisasi</th>
@@ -52,21 +47,22 @@
 						}
                     ?>
 				</table>
+			</div>
+			<div class='centered-container my-container'>
 				<h3 style='padding-bottom:10px;'>Tambah Speciality</h3>
-				<div style='width:500px;'>
-					<form method='POST' action="">
-						<div class="input-box">
-							<p>Nama Speciality</p>
-							<input type="text" class='form-control input' name="newSpeciality" placeholder="Nama Speciality">
-						</div>
-						<div class="login-container-form-btn">
-							<button class="login-form-btn">
-								Tambah
-							</button>
-                        </div>
-					</form>
+				<div>
+				<form method='POST' action="">
+					<div class="input-box">
+						<p>Nama Speciality</p>
+						<input type="text" class='my-form' name="newSpeciality" placeholder="Nama Speciality">
+					</div>
+					<div class="container-menu-btn">
+						<button class="menu-btn">
+							Tambah
+						</button>
+					</div>
+				</form>
 				</div>
-			
 			</div>
 		
 	</body>

@@ -1,7 +1,7 @@
 <div class='index-navbar'>
 	<?php include('navbar/user-navbar.php')?>
 </div>		
-<div class="container">
+<div class="my-container">
 	<h3>SELAMAT DATANG  
 		<?php 
 			if($gender==='P'){
