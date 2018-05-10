@@ -75,6 +75,24 @@
 							</button>
 						</div>
 					</form>
+					<div>
+						<h2>
+							<?php
+								if(isset($_SESSION['orderErrorId'])){
+									if($_SESSION['orderErrorId']==1){
+										echo "JADWAL SUDAH PENUH";
+									}else if ($_SESSION['orderErrorId']==2){
+										echo "DOKTER TIDAK MEMILIKI JADWAL DIHARI ITU";
+									}else if($_SESSION['orderErrorId']==3){
+										echo "DATA BELUM LENGKAP";
+									}else{
+										echo "DATA YANG ANDA MASUKAN TIDAK VALID";
+									}
+									unset($_SESSION['orderErrorId']);
+								}
+							?>
+						</h2>
+					</div>
 				</div>
 			</div>
 	</body>

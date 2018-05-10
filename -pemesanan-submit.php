@@ -14,14 +14,15 @@
 		?>
 		<div class='my-container'>
 			<?php
-				if($_SERVER['REQUEST_METHOD']=='GET'){
-					if(isset($_GET['sucess'])){
-						if($_GET['sucess']){
-							echo "<h2>PENDAFTARAN SUCCESS</h2>";
-						}
-					}else{
-						echo "<h2>SUDAH PERNAH MEMESAN</h2>";
-					}
+				if($_SERVER['REQUEST_METHOD']=='POST'){
+                    if (isset($_SESSION['orderErrorId'])) {
+                        if ($_SESSION['orderErrorId']==4) {
+                            echo "<h2>PENDAFTARAN SUCCESS</h2>";
+                            unset($_SESSION['orderErrorId']);
+                        }
+                    }
+				}else if($_SERVER['REQUEST_METHOD']=='GET'){
+					echo "<h2>SUDAH PERNAH MEMESAN</h2>";
 				}
 			?>
             

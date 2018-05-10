@@ -20,7 +20,7 @@
 					if($_SERVER['REQUEST_METHOD']=='GET'){
 						if(isset($_GET['username'])){
 							include('-history-dokter-result.php');
-							echo mysqli_error($conn);
+							
 						}else if(isset($_GET['edit'])){
 							include('-history-dokter-result-edit.php');
 						}
