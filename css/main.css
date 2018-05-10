@@ -29,7 +29,22 @@ body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
 }
-
+.my-container {
+	padding: 20px;
+}
+.centered-container {
+	text-align: center;
+	margin: auto;
+	padding: auto;
+	width: 500px;
+}
+/* GLOBAL CSS */
+.my-form {
+	font-family: Poppins-Medium;
+	border-radius: 2px;
+	min-width: 200px;
+	box-shadow: 1px 1px #333;
+}
 /*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
@@ -232,7 +247,8 @@ button:hover {
 
 /*------------------------------------------------------------------
 [ Button ]*/
-.login-container-form-btn {
+
+.login-container-form-btn, .container-menu-btn {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -240,7 +256,7 @@ button:hover {
   padding-top: 20px;
 }
 
-.login-form-btn {
+.login-form-btn, .menu-btn {
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
@@ -256,8 +272,10 @@ button:hover {
   align-items: center;
   padding: 0 25px;
 }
-
-.login-form-btn:hover {
+.menu-btn {
+	width: 50%;
+}
+.login-form-btn:hover, .menu-btn:hover {
   background: #333333;
 }
 /* INDEX CSS */
@@ -330,3 +348,28 @@ button:hover {
 	display:inline-block;
 }
 /* END OF INDEX CSS */
+
+/* MY OWN TABLE */
+table {
+	font-size: 15px;
+	border-collapse: collapse;
+	margin:auto;
+}
+table td, table th {
+	min-width: 150px;
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+table tr:nth-child(even){
+	background-color: #f2f2f2;
+}
+
+table tr:hover {
+	background-color: #ddd;
+}
+
+/* PEMBAGI KOLOM TAMPILAN UNTUK INPUT CSS */
+.my-column {
+	display:inline-block;
+	padding: 0px 10px;
+}
