@@ -1,3 +1,6 @@
+<?php
+	include ('connection/session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -18,32 +21,19 @@
 			<?php include ('navbar/dokter-navmenu.php')?>
 		</div>
 			<div class="container">
-				<h3 style='padding-bottom:10px;'>Lihat Catatan</h3>
-				<div style='width:500px;'>
-					<form method='POST' action="">
-						<div class="input-box">
-                            <p>Nama</p>
-                            <input class="input" type="text" name="nama" placeholder="Nama">
-                            <span class="focus-input"></span>
-                            <span class="symbol-input">
-                                <i class="fa fa-address-card" aria-hidden="true"></i>
-                            </span>
-                        </div>
-						<div class="input-box">
-                            <p>Username</p>
-                            <input class="input" type="text" name="username" placeholder="Username">
-                            <span class="focus-input"></span>
-                            <span class="symbol-input">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <div class="login-container-form-btn">
-							<button class="login-form-btn">
-								Cari !!
-							</button>
-						</div>
-					</form>
-				</div>
+				<?php
+					if($_SERVER['REQUEST_METHOD']=='GET'){
+						if(isset($_GET['username'])){
+							include('-history-dokter-result.php');
+							echo mysqli_error($conn);
+						}else if(isset($_GET['edit'])){
+							include('-history-dokter-result-edit.php');
+						}
+						else{
+							include('-history-dokter-search.php');
+						}
+					}
+				?>
 			</div>
 	</body>
 </html>

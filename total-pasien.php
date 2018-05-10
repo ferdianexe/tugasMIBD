@@ -5,6 +5,7 @@
 						SELECT COUNT(pekerjaandokter.idPenanganan) as 'total', pekerjaandokter.idDokter  as 'idDokter'
 			 			FROM penanganan
 						inner join pekerjaandokter on pekerjaandokter.idPenanganan = penanganan.idPenanganan
+						WHERE pekerjaandokter.sudahBertemu =1
 						GROUP by idDokter
        				 ) as ResultHimpunan
 					inner join 

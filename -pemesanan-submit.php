@@ -20,7 +20,18 @@
 				?>
 		</div>		
 		<div class='container'>
-            <h2>SUDAH PERNAH MEMESAN</h2>
+			<?php
+				if($_SERVER['REQUEST_METHOD']=='GET'){
+					if(isset($_GET['sucess'])){
+						if($_GET['sucess']){
+							echo "<h2>PENDAFTARAN SUCCESS</h2>";
+						}
+					}else{
+						echo "<h2>SUDAH PERNAH MEMESAN</h2>";
+					}
+				}
+			?>
+            
         </div>
 	</body>
 </html>
