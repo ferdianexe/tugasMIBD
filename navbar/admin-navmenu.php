@@ -1,34 +1,24 @@
-<nav class="navbar navbar-inverse">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="index.php">
-							<img src="images/logo.png" alt="IMG" style='width:25px; display:inline-block;'>
-							Salt Clinic
-						</a>
-					</div>
-					<ul class="nav navbar-nav">
-						<?php
-							$linkRequest = $_SERVER['SCRIPT_NAME']; 
-						?>
-						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"index.php")){echo 'class="active" ';}?>><a href="index.php">Home</a></li>
-						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"admin-jadwal.php")){echo 'class="active" ';}?>><a href="admin-jadwal.php">Lihat Jadwal</a></li>
-						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"admin-history.php")){echo 'class="active" ';}?>><a href="admin-history.php">Lihat Catatan</a></li>
-                        <li <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-dokter.php")){echo 'class="active" ';}?>><a href="daftar-dokter.php">Daftar Dokter</a></li>
-                        <li <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-user.php")){echo 'class="active" ';}?>><a href="daftar-user.php">Daftar User</a></li>
-                        <li <?php if(stripos($_SERVER['SCRIPT_NAME'],"notifikasi.php")){echo 'class="active" ';}?>><a href="notifikasi.php">Notifikasi</a></li>
-						<li><div class="adminbutton">
-							<button class="adminstastik">Statistik</button>
-							<div class="adminstastik-content">
-   							 <a href="total-jam.php">Jam Kerja Dokter</a>
-   							 <a href="total-pasien.php">Jumlah Pasien</a>
- 							 </div>
-							</div>
-						</li>
-						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"registration-dokter.php")){echo 'class="active" ';}?>><a href="registration-dokter.php">Registrasi Dokter</a></li>
-						<li <?php if(stripos($_SERVER['SCRIPT_NAME'],"addspesialisasi.php")){echo 'class="active" ';}?>><a href="addspesialisasi.php">Tambah spesialisasi</a></li>
-					</ul>
-					<ul class='nav navbar-nav navbar-right'>
-							<li><a href='logout.php'>Logout</a></li>
-					</ul>
-				</div>
-			</nav>
+
+<div class="index-navbar">
+	
+	<a class="brand" href="index.php">
+		<img src="images/logo.png" alt="IMG">
+		Salt Clinic
+	</a>
+	<a href="index.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"index.php")){echo 'class="active" ';}?>>Home</a>
+	<a href="admin-jadwal.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"admin-jadwal.php")){echo 'class="active" ';}?>>Lihat Jadwal</a>
+	<a href="admin-history.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"admin-history.php")){echo 'class="active" ';}?>>Lihat Catatan</a>
+	<a href="daftar-dokter.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-dokter.php")){echo 'class="active" ';}?>>Daftar Dokter</a>
+	<a href="daftar-user.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-user.php")){echo 'class="active" ';}?>>Daftar User</a>
+	<a href="notifikasi.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"notifikasi.php")){echo 'class="active" ';}?>>Notifikasi</a>
+	<div class='dropdown'>
+		<button class='dropbtn'>Statistik</button>
+		<div class='dropdown-content'>
+			<a href="total-jam.php">Jam Kerja Dokter</a>
+			<a href="total-pasien.php">Jumlah Pasien</a>
+		</div>
+	</div>
+	<a href="registration-dokter.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"registration-dokter.php")){echo 'class="active" ';}?>>Registrasi Dokter</a>
+	<a href="addspesialisasi.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"addspesialisasi.php")){echo 'class="active" ';}?>>Tambah spesialisasi</a>
+	<a style='float:right' href='logout.php'>Logout</a>
+</div>
