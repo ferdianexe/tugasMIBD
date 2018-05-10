@@ -6,6 +6,7 @@
 					SELECT pekerjaanDokter.idPenanganan,tarif,waktuMulai,waktuSelesai,tanggal,catatan,isDeleted,waktuPengubahan,idDokter,idPasien
 			   		FROM penanganan
 			  		Inner Join pekerjaandokter on pekerjaanDokter.idPenanganan = penanganan.idPenanganan
+					WHERE pekerjaandokter.sudahBertemu = 1 
 
 				) as daftarPenanganan
 				INNER JOIN 

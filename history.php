@@ -7,7 +7,7 @@
 		INNER JOIN users as doc ON doc.idUser = dokter.idUser
 		INNER JOIN users as user ON pekerjaandokter.idPasien = user.idUser
 		INNER JOIN penanganan ON penanganan.idPenanganan = pekerjaandokter.idPenanganan
-	WHERE penanganan.isDeleted = 0
+	WHERE penanganan.isDeleted = 0 AND pekerjaandokter.sudahBertemu = 1
 	";
 	$result = $conn->query($query);
 	if($result){
@@ -45,8 +45,13 @@
 						<th>Date</th>
 						<th>Catatan</th>
 					</tr>
-					<?php 
+					<?php 	
 						if($result){
+							if(!mysqli_num_rows($result)){
+								echo "<tr><td colspan=5>
+								  ANDA BELUM MEMILIKI RIWAYAT KESEHATAN TOLONG LAKUKAN PEMESANAN</td>
+									</tr>";
+							}
 							while($row=$result->fetch_array()){
 								echo "<tr>
 									<td> ".$row['namaDokter']."</td>

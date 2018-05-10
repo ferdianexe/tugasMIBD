@@ -21,6 +21,14 @@
 			if ($_SESSION['priviledge'] == 3) {
 				include("admin-index.php");
 			} elseif ($_SESSION['priviledge'] == 2) {
+				
+				$query = "SELECT idDokter
+						  FROM dokter
+						  where idUser = $id
+						  ";
+				$result =$conn->query($query)->fetch_array();
+
+				$_SESSION['idDokter']=$result['idDokter'] ;
 				include("dokter-index.php");
 			} else{
 				include("user-index.php");

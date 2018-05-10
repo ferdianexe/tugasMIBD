@@ -7,22 +7,32 @@
 		$date = $_POST['tanggal'];
 		$text = $_POST['catatan'];
 		$namaid =$_POST['nama'];
+		$dateEnd = new DateTime();
+		$dateEnd->setTimezone(new DateTimeZone("Asia/Jakarta"));
+		$dateEnd->modify("+30 minutes");
+		$waktuSelesai= $dateEnd->format('H:i:s');
 		$query = "UPDATE penanganan
-				  SET waktuMulai ='now()',waktuSelesai=now()+1800,tanggal='$date',catatan='$text'
+				  SET waktuMulai =now(),waktuSelesai='$waktuSelesai',tanggal='$date',catatan='$text'
 				  WHERE idPenanganan = $namaid
 
 		";
-	
+		
 		$result= $conn->query($query);
-		//echo mysqli_error($conn);
+		if($result){
+			$query = "UPDATE pekerjaandokter
+					  SET sudahBertemu = 1
+					  WHERE idPenanganan =$namaid";
+			$conn->query($query);
+		}
+		echo mysqli_error($conn);
 		header("Location:dokter-create.php");
 		exit();
-		//exit ;
+		
     }
 	$orderQuery = "SELECT  users.nama as nama , users.username as username ,tOrder.idPenanganan as id 
 				   FROM (
 				  		SELECT idPasien,idPenanganan FROM `pekerjaandokter` 
-						WHERE waktuTemu = DATE_FORMAT(now(),'%Y-%m-%d')
+						WHERE waktuTemu = DATE_FORMAT(now(),'%Y-%m-%d') AND  sudahBertemu = 0
      					) as tOrder
 				 INNER JOIN users on users.idUser = tOrder.idPasien
 				";
