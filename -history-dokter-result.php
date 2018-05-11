@@ -1,3 +1,15 @@
+<?php
+    if(isset($_GET['deleted'])){
+        $idDokter = $_SESSION['idDokter'];
+        $idPdel=$_GET['deleted'];
+        
+         $deletedQuery = "UPDATE catatandokter
+                          SET isDeleted = 1
+                          WHERE idDokter=$idDokter AND idPenanganan=$idPdel";
+        $result = $conn->query($deletedQuery);
+        echo mysqli_error($conn);
+    }
+?>
 <table>
     <tr>
         <th>WAKTU TEMU</th>
@@ -10,7 +22,7 @@
         FROM `pekerjaandokter`
         INNER JOIN users as tuser on tuser.idUser = idPasien
         INNER JOIN penanganan on penanganan.idPenanganan = pekerjaandokter.idPenanganan
-        WHERE pekerjaandokter.sudahBertemu=1 AND tuser.username='$usrn' AND pekerjaandokter.idDokter='$idDokter'";
+        WHERE pekerjaandokter.sudahBertemu=1 AND tuser.username='$usrn' AND pekerjaandokter.idDokter='$idDokter' AND penanganan.isDeleted=0 ";
         $result= $conn->query($query);
         if ($result) {
             if (!mysqli_num_rows($result)) {
@@ -27,7 +39,7 @@
                         <a class ='linkstyle' href='dokter-history.php?edit=$idP'>EDIT</a></td>
                         <td>
                             <button> 
-                                <a class ='linkstyle' href='dokter-history.php?deleted=$idP'>HAPUS</a> 
+                                <a class ='linkstyle' href='dokter-history.php?username=$usrn&deleted=$idP'>HAPUS</a> 
                             </button>
                         </td>
                     </tr>";

@@ -42,6 +42,7 @@
 		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class='index-navbar'>
@@ -118,6 +119,7 @@
 	$("#spec option:gt(0)").empty();
 		$.each(arrSpeciality,function(index,value){
 			if(index!=0){
+				console.log(value);
 				specMenu.append($("<option/>").attr("value",index).text(value));
 			}
 		})
