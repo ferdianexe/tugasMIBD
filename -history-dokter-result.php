@@ -2,12 +2,12 @@
     if(isset($_GET['deleted'])){
         $idDokter = $_SESSION['idDokter'];
         $idPdel=$_GET['deleted'];
-        
-         $deletedQuery = "UPDATE catatandokter
+        $usrn = $_GET['username'];
+        $deletedQuery = "UPDATE catatandokter
                           SET isDeleted = 1
                           WHERE idDokter=$idDokter AND idPenanganan=$idPdel";
         $result = $conn->query($deletedQuery);
-        echo mysqli_error($conn);
+        header("Location:dokter-history.php?username=$usrn");
     }
 ?>
 <table>
