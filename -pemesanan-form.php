@@ -42,6 +42,7 @@
 		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class='index-navbar'>
@@ -75,6 +76,24 @@
 							</button>
 						</div>
 					</form>
+					<div>
+						<h2>
+							<?php
+								if(isset($_SESSION['orderErrorId'])){
+									if($_SESSION['orderErrorId']==1){
+										echo "JADWAL SUDAH PENUH";
+									}else if ($_SESSION['orderErrorId']==2){
+										echo "DOKTER TIDAK MEMILIKI JADWAL DIHARI ITU";
+									}else if($_SESSION['orderErrorId']==3){
+										echo "DATA BELUM LENGKAP";
+									}else{
+										echo "DATA YANG ANDA MASUKAN TIDAK VALID";
+									}
+									unset($_SESSION['orderErrorId']);
+								}
+							?>
+						</h2>
+					</div>
 				</div>
 			</div>
 	</body>
@@ -100,6 +119,7 @@
 	$("#spec option:gt(0)").empty();
 		$.each(arrSpeciality,function(index,value){
 			if(index!=0){
+				console.log(value);
 				specMenu.append($("<option/>").attr("value",index).text(value));
 			}
 		})

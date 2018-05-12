@@ -1,3 +1,20 @@
+<?php
+	include ('connection/session.php');
+	if(isset($_GET['aktif'])){
+		$idUser = $_GET['aktif'];
+		$query = "UPDATE users
+				  SET isActive=1
+				  WHERE idUser=$idUser";
+		$conn->query($query);
+		echo mysqli_error($conn);
+		header("Location:notifikasi.php");
+		exit();
+	}
+	$query = " SELECT nama,username,jenisKelamin,Alamat,idUser
+	FROM users
+	WHERE priviledge=1 AND isActive =0";
+    $result =$conn->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -11,8 +28,28 @@
 	<body>
 		<?php include ('navbar/admin-navmenu.php')?>	
 		<div class="my-container">
-			<p>Ada panggilan darurat pada pukul 19.00</p>
-			<p>Ada panggilan ke rumah sakit ASD pada pukul 20.00</p>
-		</div>
+			<table class='table table-striped'>
+				<tr>
+					<th>Nama</th>
+					<th>Username</th>
+					<th>Jenis Kelamin</th>
+					<th>Alamat</th>
+					<th>Aktifkan</th>
+				</tr>
+			<?php
+				while ($row=$result->fetch_array()) {
+						if ($row['jenisKelamin']=='L') {
+								$jenisKelamin = "Laki Laki";
+						} else {
+								$jenisKelamin ="Perempuan";
+						}
+						echo "<tr>
+						<td>". $row["nama"] ."</td>
+						<td> ".$row["username"] ."</td>
+						<td> ".$jenisKelamin."</td>
+						<td> ".$row["Alamat"]."</td>
+						<td><a href=notifikasi.php?aktif=".$row['idUser'].">AKTIFKAN</a></td></tr>";
+						}
+			?>
 	</body>
 </html>

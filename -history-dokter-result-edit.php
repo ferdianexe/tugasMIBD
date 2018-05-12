@@ -1,7 +1,7 @@
 <?php
     //no need session this is include page
     $idP = $_GET['edit'];
-    $query = "SELECT tanggal,catatan,tuser.nama as 'nama'
+    $query = "SELECT tanggal,catatan,tuser.nama as 'nama',tarif
               FROM penanganan
               INNER JOIN pekerjaanDokter as tdokter on tdokter.idPenanganan=penanganan.idPenanganan
               INNER JOIN users as tuser on tdokter.idPasien=tuser.idUser
@@ -41,8 +41,12 @@
 							<p>Catatan</p>
 							<textarea class="my-form" rows="5" name="catatan" id="comment"><?php echo $result['catatan']?></textarea>
 						</div>
-						<div class="container-menu-btn">
-							<button class="menu-btn">
+						<div class='input-box'>
+							<p>Biaya</p>
+							<input class="input" type="text" name="biayabaru" placeholder="Rp.0,-">KOSONGKAN JIKA HARGANYA SAMA
+						</div>
+						<div class="login-container-form-btn">
+							<button class="login-form-btn">
 								EDIT
 							</button>
 						</div>

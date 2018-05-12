@@ -1,8 +1,9 @@
 <?php
 	include ('connection/session.php');
-	$query = " SELECT tusers.nama as nama ,tusers.username as username,tusers.jenisKelamin as jenisKelamin,tusers.Alamat as Alamat,tspesial.namaSpesialisasi as spesialisasi,noRuangan
-	FROM dokter INNER JOIN spesialisasi as tspesial on tspesial.idSpesialisasi = dokter.idSpesialisasi
-				INNER JOIN users as tusers on dokter.idUser = tusers.idUser ";
+	$query = " SELECT tusers.nama as nama ,tusers.username as username,tusers.jenisKelamin as jenisKelamin,tusers.Alamat as Alamat,tspesial.namaSpesialisasi as spesialisasi,noRuangan,idDokter
+	FROM dokter 
+	INNER JOIN spesialisasi as tspesial on tspesial.idSpesialisasi = dokter.idSpesialisasi
+	INNER JOIN users as tusers on dokter.idUser = tusers.idUser ";
 	$result =$conn->query($query);
 	echo mysqli_error($conn);
 ?>
@@ -17,7 +18,13 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
-	<?php include ('navbar/admin-navmenu.php')?>				
+	<?php include ('navbar/admin-navmenu.php')?>
+	<?php
+		if(isset($_GET['idktr'])){
+			include('-jadwal-dokter-details.php');
+			exit();
+		}
+	?>				
 	<div class="my-container">
 		<table>
 			<tr>
@@ -25,31 +32,31 @@
 				<th>Username</th>
 				<th>Jenis Kelamin</th>
 				<th>No Ruangan</th>
-				<th>Shift Kerja</th>
 				<th>Alamat</th>
 				<th>Spesialisasi</th>
+				<th>Keterangan</th>
 			</tr>
 			<?php
 				if($result){
-					while ($row=$result->fetch_array()) {
-														if ($row['jenisKelamin']=='L') {
-																$jenisKelamin = "Laki Laki";
-														} else {
-																$jenisKelamin ="Perempuan";
-														}
-														echo "<tr>
-								<td>". $row["nama"] ."</td>
-								<td> ".$row["username"] ."</td>
-								<td> ".$jenisKelamin."</td>
-								<td> ".$row['noRuangan']."</td>
-								<td> SEHARIAN </td>
-								<td> ".$row["Alamat"]."</td>
-								<td> ".$row["spesialisasi"]."</td>
-						";
-												}
+					while ($row=$result->fetch_array()) 
+					{
+						if ($row['jenisKelamin']=='L') {
+								$jenisKelamin = "Laki Laki";
+						} else {
+								$jenisKelamin ="Perempuan";
+						}
+						echo "<tr>
+						<td>". $row["nama"] ."</td>
+						<td> ".$row["username"] ."</td>
+						<td> ".$jenisKelamin."</td>
+						<td> ".$row['noRuangan']."</td>
+						<td> ".$row["Alamat"]."</td>
+						<td> ".$row["spesialisasi"]."</td>
+						<td> <a href=daftar-dokter.php?idktr=".$row['idDokter'].">DETAIL</a></td></tr>";
+					}
 				}
 												
-											?>
+			?>
 		</table>
 	</div>
 	</body>
