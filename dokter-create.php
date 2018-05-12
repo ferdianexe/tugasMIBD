@@ -84,10 +84,10 @@
 						</div>
 						<div class='input-box'>
 							<p>Biaya</p>
-							<input class="input" type="text" name="biaya" placeholder="Rp.0,-">
+							<input class="my-form" type="text" name="biaya" placeholder="Rp.0,-">
 						</div>
-						<div class="login-container-form-btn">
-							<button class="login-form-btn">
+						<div class="container-menu-btn">
+							<button class="menu-btn">
 								Pesan !!
 							</button>
 						</div>
