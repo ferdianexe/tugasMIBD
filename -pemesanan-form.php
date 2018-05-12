@@ -50,7 +50,7 @@
 					include('navbar/user-navbar.php'); 
 				?>
 		</div>		
-			<div class="my-container">
+			<div class="my-container centered-container">
 				<h3 style='padding-bottom:10px;'>Pemesanan Praktek Dokter</h3>
 				<div>
 					<form method='POST' action="pemesanan.php">
