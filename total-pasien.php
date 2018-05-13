@@ -15,7 +15,17 @@
 						
 
 					)as namaDokterHimp on namaDokterHimp.idDokter = resultHimpunan.idDokter
-				ORDER by Total  DESC";
+				";
+	$filter="";
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		if(isset($_GET['userID'])){
+			if($_GET['userID']!=""){
+				$user=$_GET['userID'];
+					$filter=" WHERE namaDokter like '%$user%'";
+			}
+		}
+	}
+	$query.=$filter;
     $result = $conn->query($query);
 	echo mysqli_error($conn);
 
@@ -33,7 +43,15 @@
 	<body>
 		
 			<?php include('navbar/admin-navmenu.php')?>	
-				
+			<form method="GET" action="">
+			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+			<div class="container-menu-btn" style="width:">
+						<button class="menu-btn">
+							Cari
+						</button>
+					</div>
+			</fieldset>
+			</form>
 			<div class="my-container">
 				<table>
 					<tr>

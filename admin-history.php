@@ -1,5 +1,5 @@
 <?php
-    include('connection/session.php');
+	include('connection/session.php');
     $query = " SELECT daftarDokter.nama as 'namaDokter',daftarPasien.nama as 'namaPasien',tarif,waktuMulai,waktuSelesai,tanggal,catatan,isDeleted,waktuPengubahan
 			   FROM
 				(
@@ -21,6 +21,20 @@
 					FROM users
 				) as daftarPasien on daftarPasien.idUser = daftarPenanganan.idPasien
 	";
+	$filter="";
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		if(isset($_GET['userID'])&&isset($_GET['pilihan'])){
+			if($_GET['userID']!=""&&$_GET['pilihan']!=""){
+				$user=$_GET['userID'];
+				if($_GET['pilihan']=='dokter'){
+					$filter="WHERE daftarDokter.nama like '%$user%'";
+				}else{
+					$filter= "WHERE daftarPasien.nama like '%$user%'";
+				}
+			}
+		}
+	}
+	$query.=$filter;
 	$result = $conn->query($query);
 	echo mysqli_error($conn);
 
@@ -38,7 +52,23 @@
 	<body>
 		
 			<?php include('navbar/admin-navmenu.php')?>	
-				
+			<form method="GET" action="">
+			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+			<div class="input-box">
+						<p>Dokter / Pasien</p>
+						<select id='pilihan' class='my-form' name="pilihan">
+							<option value="" disabled selected hidden>Pilih Kategori</option>
+							<option value="dokter">Dokter</option>
+							<option value="pasien">Pasien</option>
+						</select>
+					</div>
+			<div class="container-menu-btn" style="width:">
+						<button class="menu-btn">
+							Cari
+						</button>
+					</div>
+			</fieldset>
+			</form>
 			<div class="my-container">
 				<table>
 					<tr>

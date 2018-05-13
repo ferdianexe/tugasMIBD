@@ -13,6 +13,16 @@
 	$query = " SELECT nama,username,jenisKelamin,Alamat,idUser
 	FROM users
 	WHERE priviledge=1 AND isActive =0";
+	$filter="";
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		if(isset($_GET['userID'])){
+			if($_GET['userID']!=""){
+				$user=$_GET['userID'];
+					$filter=" AND nama like '%$user%'";
+			}
+		}
+	}
+	$query .=$filter;
     $result =$conn->query($query);
 ?>
 <!DOCTYPE html>
@@ -27,6 +37,15 @@
 	</head>
 	<body>
 		<?php include ('navbar/admin-navmenu.php')?>	
+		<form method="GET" action="">
+			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+			<div class="container-menu-btn" style="width:">
+						<button class="menu-btn">
+							Cari
+						</button>
+					</div>
+			</fieldset>
+			</form>
 		<div class="my-container">
 			<table class='table table-striped'>
 				<tr>
