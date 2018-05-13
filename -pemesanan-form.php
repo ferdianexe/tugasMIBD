@@ -42,7 +42,6 @@
 		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class='index-navbar'>
@@ -68,7 +67,7 @@
 						</div>
 						<div class="input-box">
 							<p>Pilih Hari</p>
-							<input class='my-form' type="date" name='hari'>
+							<input class='my-form' id='datePicker' type="date" name='hari'>
 						</div>
 						<div class="container-menu-btn">
 							<button class="menu-btn">
@@ -100,29 +99,54 @@
 </html>
 <script>	
 	$(document).ready(function(){
-	var dktr = $("#dname");
-	$('#spec').on('change',function(){
-	$("#dname").empty();
-	var dataArray = arrData[this.value];
-		$.each(dataArray,function(index,val){
-			for(var i = 0 ; i<arrDokterId.length;i++){
-				if(arrDokterId[i]==val){
-					dktr.append($("<option/>").attr("value",i).text(val));
+		var dktr = $("#dname");
+		$('#spec').on('change',function(){
+			$("#dname").empty();
+			var dataArray = arrData[this.value];
+			$.each(dataArray,function(index,val){
+				for(var i = 0 ; i<arrDokterId.length;i++){
+					if(arrDokterId[i]==val){
+						dktr.append($("<option/>").attr("value",i).text(val));
+					}
 				}
-				
-			}
-			
-		
+			});
 		});
-	});
-	var specMenu = $("#spec");
-	$("#spec option:gt(0)").empty();
+		var specMenu = $("#spec");
+		$("#spec option:gt(0)").empty();
 		$.each(arrSpeciality,function(index,value){
 			if(index!=0){
-				console.log(value);
-				specMenu.append($("<option/>").attr("value",index).text(value));
+				if (value != null) {
+					specMenu.append($("<option/>").attr("value",index).text(value));
+				}
 			}
 		})
-	
+		<?php
+			if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+				if (isset($_GET['id']) && isset($_GET['speciality']) && isset($_GET['dokter']) && isset($_GET['hari'])) {
+					if (!is_null($_GET['id']) && !is_null($_GET['speciality']) && !is_null($_GET['dokter']) && !is_null($_GET['hari'])) {
+						$_SESSION['IS_UPDATING'] = $_GET['id'];
+						?>
+							var speciality = <?=$_GET['speciality']?>;
+							var dokter = <?=$_GET['dokter']?>;
+							var hari = <?=$_GET['hari']?>;
+							var options = $('#spec option');
+							$.each(options, function(index, option) {
+								if (option.value == speciality) {
+									$('#spec').prop('selectedIndex', index);
+									$('#spec').trigger('change');
+								}
+							})
+							var options = $('#dname option');
+							$.each(options, function(index, option) {
+								if (option.value == dokter) {
+									$('#dname').prop('selectedIndex', index);
+								}
+							})
+							$('#datePicker')[0].value = hari;
+						<?php
+					}
+				}
+			}
+		?>
 })
 </script>

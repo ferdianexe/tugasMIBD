@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="index-navbar">
 		<a class="brand" href="index.php">
 				<img src="images/logo.png" alt="IMG">

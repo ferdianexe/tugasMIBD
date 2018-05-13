@@ -1,4 +1,4 @@
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="index-navbar">
 	
 	<a class="brand" href="index.php">
@@ -6,7 +6,7 @@
 		Salt Clinic
 	</a>
 	<a href="index.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"index.php")){echo 'class="active" ';}?>>Home</a>
-	<a href="admin-jadwal.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"admin-jadwal.php")){echo 'class="active" ';}?>>Lihat Jadwal</a>
+	<a href="jadwal.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"jadwal.php")){echo 'class="active" ';}?>>Lihat Jadwal</a>
 	<a href="admin-history.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"admin-history.php")){echo 'class="active" ';}?>>Lihat Catatan</a>
 	<a href="daftar-dokter.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-dokter.php")){echo 'class="active" ';}?>>Daftar Dokter</a>
 	<a href="daftar-user.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"daftar-user.php")){echo 'class="active" ';}?>>Daftar User</a>
