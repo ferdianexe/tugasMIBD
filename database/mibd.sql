@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2018 at 08:33 AM
+-- Generation Time: May 13, 2018 at 03:03 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `mibd`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `catatandokter`
+-- (See below for the actual view)
+--
+CREATE TABLE `catatandokter` (
+`isDeleted` tinyint(1)
+,`idDokter` int(11)
+,`idPenanganan` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -63,10 +75,10 @@ CREATE TABLE `jadwalpraktek` (
 --
 
 INSERT INTO `jadwalpraktek` (`idPraktek`, `idDokter`, `waktuMulai`, `waktuSelesai`, `hari`) VALUES
-(2, 1, '10:00:00', '15:00:00', 1),
+(2, 1, '10:00:00', '11:00:00', 1),
 (3, 1, '10:00:00', '15:00:00', 2),
 (4, 1, '15:00:00', '19:00:00', 3),
-(5, 1, '16:00:00', '20:00:00', 4);
+(5, 1, '16:00:00', '17:00:00', 4);
 
 -- --------------------------------------------------------
 
@@ -108,7 +120,10 @@ CREATE TABLE `pekerjaandokter` (
 
 INSERT INTO `pekerjaandokter` (`idDokter`, `idPasien`, `idPenanganan`, `waktuDaftar`, `waktuTemu`, `sudahBertemu`) VALUES
 (1, 1, 3, '2018-05-07', '2018-05-07', 0),
-(1, 1, 4, '2018-05-10', '2018-05-10', 1);
+(1, 1, 4, '2018-05-10', '2018-05-10', 1),
+(1, 1, 10, '2018-05-10', '2018-05-14', 0),
+(1, 4, 11, '2018-05-10', '2018-05-10', 1),
+(1, 5, 24, '2018-05-10', '2018-05-10', 1);
 
 -- --------------------------------------------------------
 
@@ -133,7 +148,10 @@ CREATE TABLE `penanganan` (
 
 INSERT INTO `penanganan` (`idPenanganan`, `tarif`, `waktuMulai`, `waktuSelesai`, `tanggal`, `catatan`, `isDeleted`, `waktuPengubahan`) VALUES
 (3, 0, '00:00:00', '00:00:00', '0000-00-00', NULL, 0, NULL),
-(4, 0, '12:02:55', '12:32:55', '2018-05-10', 'Pasien sudah sembuh sebelumnya terkena tifus', 0, '2018-05-10');
+(4, 5000, '12:02:55', '12:32:55', '2018-05-10', 'Pasien sudah sembuh sebelumnya terkena tifus', 0, '2018-05-10'),
+(10, 0, '00:00:00', '00:00:00', '0000-00-00', NULL, 0, NULL),
+(11, 0, '21:15:45', '21:45:45', '2018-05-10', 'dasd', 0, NULL),
+(24, 0, '21:16:09', '21:46:09', '2018-05-10', 'GOGOGOGO', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,10 +198,19 @@ INSERT INTO `users` (`idUser`, `nama`, `umur`, `jenisKelamin`, `priviledge`, `is
 (1, 'Roxy', 16, 'P', 1, 1, 'Roxy', 'Jln Jendral Sderman', 'Roxy'),
 (2, 'Roy Kiyoshi', 25, 'L', 2, 1, 'RoyK', 'Jln kesalahan garam', 'Royy'),
 (3, 'admin', 22, 'L', 3, 1, 'admin', 'jalan kurang sehat', 'admin'),
-(4, 'Ferdi', NULL, 'L', 1, 0, 'Ferdiboy', 'Kddff', 'test'),
-(5, 'UserTest', NULL, 'L', 1, 0, 'Root', 'Hahay', 'root'),
+(4, 'Ferdi', NULL, 'L', 1, 1, 'Ferdiboy', 'Kddff', 'test'),
+(5, 'UserTest', NULL, 'L', 1, 1, 'Root', 'Hahay', 'root'),
 (6, 'Donald Trump', 78, 'L', 2, 1, 'Dtrump', 'Jln Kebayoran 20154', 'trump'),
 (7, 'Megan Fox', 33, 'L', 2, 1, 'mfox', 'Jln Dursasana', 'fox');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `catatandokter`
+--
+DROP TABLE IF EXISTS `catatandokter`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `catatandokter`  AS  select `penanganan`.`isDeleted` AS `isDeleted`,`pekerjaandokter`.`idDokter` AS `idDokter`,`penanganan`.`idPenanganan` AS `idPenanganan` from (`penanganan` join `pekerjaandokter` on((`pekerjaandokter`.`idPenanganan` = `penanganan`.`idPenanganan`))) ;
 
 --
 -- Indexes for dumped tables
@@ -259,7 +286,7 @@ ALTER TABLE `jadwalpraktek`
 -- AUTO_INCREMENT for table `penanganan`
 --
 ALTER TABLE `penanganan`
-  MODIFY `idPenanganan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPenanganan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `spesialisasi`

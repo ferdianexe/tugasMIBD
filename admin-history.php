@@ -32,6 +32,20 @@
 					$filter= "WHERE daftarPasien.nama like '%$user%'";
 				}
 			}
+			
+		}
+		if(isset($_GET['sort'])&&isset($_GET['sortby'])){
+			if($_GET['sort']!=""&&$_GET['sortby']!=""){
+				$sub=$_GET['sort'];
+				$ascordesc =$_GET['sortby'];
+				$filter.=" ORDER BY $sub ";
+				if($ascordesc=='asc'){
+					$filter.="ASC";
+				}else{
+					$filter.="DESC";
+				}
+			}
+			
 		}
 	}
 	$query.=$filter;
@@ -61,7 +75,18 @@
 							<option value="dokter">Dokter</option>
 							<option value="pasien">Pasien</option>
 						</select>
-					</div>
+			</div>
+			<div class="input-box">
+						<p>Sort By :</p>
+						<select id='pilihan' class='my-form' name="sort">
+							<option value="daftarDokter.nama">Dokter</option>
+							<option value="daftarPasien.nama">Pasien</option>
+							<option value="tanggal">Date</option>
+							<option value="isDeleted">dihapus</option>
+						</select>
+			</div>
+			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
+  			<input type="radio" name="sortby" value="asc"> Menaik<br>
 			<div class="container-menu-btn" style="width:">
 						<button class="menu-btn">
 							Cari

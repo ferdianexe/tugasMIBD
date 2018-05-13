@@ -11,6 +11,18 @@
 					$filter=" AND nama like '%$user%'";
 			}
 		}
+		if(isset($_GET['sort'])&&isset($_GET['sortby'])){
+            if ($_GET['sort']!=""&&$_GET['sortby']!="") {
+                $sub=$_GET['sort'];
+                $ascordesc =$_GET['sortby'];
+                $filter.=" ORDER BY $sub ";
+                if ($ascordesc=='asc') {
+                    $filter.="ASC";
+                } else {
+                    $filter.="DESC";
+                }
+            }
+		}
 	}
 	$query .=$filter;
     $result =$conn->query($query);
@@ -29,6 +41,15 @@
 		<?php include ('navbar/admin-navmenu.php')?>
 		<form method="GET" action="">
 			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+			<div class="input-box">
+						<p>Sort By :</p>
+						<select id='pilihan' class='my-form' name="sort">
+							<option value="nama">Nama</option>
+							<option value="username">Username</option>
+						</select>
+			</div>
+			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
+  			<input type="radio" name="sortby" value="asc"> Menaik<br>
 			<div class="container-menu-btn" style="width:">
 						<button class="menu-btn">
 							Cari
