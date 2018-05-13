@@ -15,7 +15,30 @@
 						
 
 					)as namaDokterHimp on namaDokterHimp.idDokter = resultHimpunan.idDokter
-				ORDER by Total  DESC";
+				";
+	$filter="";
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		if(isset($_GET['userID'])){
+			if($_GET['userID']!=""){
+				$user=$_GET['userID'];
+					$filter=" WHERE namaDokter like '%$user%'";
+			}
+		}
+		$filter.=" ORDER BY total ";
+		$sortBy =" DESC";
+		if(isset($_GET['sortby'])){
+            if ($_GET['sortby']!="") {
+                $ascordesc =$_GET['sortby'];
+                if ($ascordesc=='asc') {
+                    $sortBy=" ASC";
+                } else {
+                    $sortBy=" DESC";
+                }
+            }
+		}
+	}
+	$query .=$filter;
+	$query .=$sortBy;
     $result = $conn->query($query);
 	echo mysqli_error($conn);
 
@@ -33,7 +56,18 @@
 	<body>
 		
 			<?php include('navbar/admin-navmenu.php')?>	
-				
+			<form method="GET" action="">
+			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+			<p>Sort :</p>
+			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
+  			<input type="radio" name="sortby" value="asc"> Menaik<br>
+			<div class="container-menu-btn" style="width:">
+						<button class="menu-btn">
+							Cari
+						</button>
+					</div>
+			</fieldset>
+			</form>
 			<div class="my-container">
 				<table>
 					<tr>

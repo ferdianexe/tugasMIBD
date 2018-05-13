@@ -4,6 +4,28 @@
 	FROM dokter 
 	INNER JOIN spesialisasi as tspesial on tspesial.idSpesialisasi = dokter.idSpesialisasi
 	INNER JOIN users as tusers on dokter.idUser = tusers.idUser ";
+	$filter="";
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+		if(isset($_GET['userID'])){
+			if($_GET['userID']!=""){
+				$user=$_GET['userID'];
+					$filter="WHERE tusers.nama like '%$user%'";
+			}
+		}
+		if(isset($_GET['sort'])&&isset($_GET['sortby'])){
+            if ($_GET['sort']!=""&&$_GET['sortby']!="") {
+                $sub=$_GET['sort'];
+                $ascordesc =$_GET['sortby'];
+                $filter.=" ORDER BY $sub ";
+                if ($ascordesc=='asc') {
+                    $filter.="ASC";
+                } else {
+                    $filter.="DESC";
+                }
+            }
+		}
+	}
+	$query .=$filter;
 	$result =$conn->query($query);
 	echo mysqli_error($conn);
 ?>
@@ -24,7 +46,27 @@
 			include('-jadwal-dokter-details.php');
 			exit();
 		}
-	?>				
+	?>
+	<form method="GET" action="">
+			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+			<div class="input-box">
+						<p>Sort By :</p>
+						<select id='pilihan' class='my-form' name="sort">
+							<option value="tusers.nama">Nama</option>
+							<option value="tusers.username">Username</option>
+							<option value="tspesial.namaSpesialisasi">Spesialisasi</option>
+							<option value="noRuangan">no Ruangan</option>
+						</select>
+			</div>
+			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
+  			<input type="radio" name="sortby" value="asc"> Menaik<br>
+			<div class="container-menu-btn" style="width:">
+						<button class="menu-btn">
+							Cari
+						</button>
+					</div>
+			</fieldset>
+			</form>				
 	<div class="my-container">
 		<table>
 			<tr>
