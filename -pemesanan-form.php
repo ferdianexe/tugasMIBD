@@ -45,9 +45,6 @@
 	</head>
 	<body>
 		<div class='index-navbar'>
-				<?php
-					include('navbar/user-navbar.php'); 
-				?>
 		</div>		
 			<div class="my-container centered-container">
 				<h3 style='padding-bottom:10px;'>Pemesanan Praktek Dokter</h3>

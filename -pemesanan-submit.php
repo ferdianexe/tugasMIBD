@@ -9,9 +9,6 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
-		<?php
-			include('navbar/user-navbar.php'); 
-		?>
 		<div class='my-container centered-container'>
 			<?php
 				if($_SERVER['REQUEST_METHOD']=='POST'){

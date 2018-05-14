@@ -11,3 +11,9 @@
 
 		<a style='float:right' href='logout.php'>Logout</a>
 </div>
+<?php
+			if ($_SESSION['priviledge'] != 2) {
+				header("404.php");
+				exit();
+			}
+	?>
