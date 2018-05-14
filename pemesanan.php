@@ -54,7 +54,7 @@
 							$tanggalPemesanan = $_POST['hari'];
 							$limitquery = "SELECT count(idPenanganan) as 'counter'
 							FROM pekerjaandokter
-							WHERE waktuTemu ='$tanggalPemesanan'";
+							WHERE waktuTemu ='$tanggalPemesanan' AND idDokter =$idDokter";
 							$resultLimit = $conn->query($limitquery);
 							$currentLimit = $resultLimit->fetch_array()['counter'];
 						
