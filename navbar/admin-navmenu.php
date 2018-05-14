@@ -24,3 +24,9 @@
 	<a href="addspesialisasi.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"addspesialisasi.php")){echo 'class="active" ';}?>>Tambah spesialisasi</a>
 	<a style='float:right' href='logout.php'>Logout</a>
 </div>
+	<?php
+			if ($_SESSION['priviledge'] != 3) {
+				header("404.php");
+				exit();
+			}
+	?>

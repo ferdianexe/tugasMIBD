@@ -1,5 +1,6 @@
 <?php
     include('connection/session.php');
+	include('navbar/user-navbar.php'); 
     $id = $_SESSION['id'];
     $nowDate = date('Y-m-d');
     $sqlPenanganan = "SELECT COUNT(idPenanganan) as counter FROM pekerjaandokter

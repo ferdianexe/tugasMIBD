@@ -10,3 +10,9 @@
 	<a href="history.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"history.php")){echo 'class="active" ';}?>>History</a>
   <a style='float:right' href='logout.php'>Logout</a>
 </div>
+<?php
+			if ($_SESSION['priviledge'] != 1) {
+				header("Location:404.php");
+				exit();
+			}
+	?>
