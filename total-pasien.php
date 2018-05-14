@@ -56,18 +56,20 @@
 	<body>
 		
 			<?php include('navbar/admin-navmenu.php')?>	
-			<form method="GET" action="">
-			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
-			<p>Sort :</p>
-			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
-  			<input type="radio" name="sortby" value="asc"> Menaik<br>
-			<div class="container-menu-btn" style="width:">
+			<div class='my-container centered-container'>
+				<label for="">Nama </label>
+				<form method="GET" action="">
+					<input type="text" name="userID" id="" class='my-form'><br>
+					<p>Sort :</p>
+					<input type="radio" name="sortby" value="desc" checked> Menurun<br>
+						<input type="radio" name="sortby" value="asc"> Menaik<br>
+					<div class="container-menu-btn" style="width:">
 						<button class="menu-btn">
 							Cari
 						</button>
 					</div>
-			</fieldset>
-			</form>
+				</form>
+			</div>
 			<div class="my-container">
 				<table>
 					<tr>

@@ -66,34 +66,36 @@
 	<body>
 		
 			<?php include('navbar/admin-navmenu.php')?>	
-			<form method="GET" action="">
-			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
-			<div class="input-box">
-						<p>Dokter / Pasien</p>
-						<select id='pilihan' class='my-form' name="pilihan">
-							<option value="" disabled selected hidden>Pilih Kategori</option>
-							<option value="dokter">Dokter</option>
-							<option value="pasien">Pasien</option>
-						</select>
+			<div class='my-container centered-container'>
+				<label for="">Nama </label> 
+				<form method="GET" action="">
+				<input type="text" name="userID" id="" class='my-form'><br>
+				<div class="input-box">
+							<p>Dokter / Pasien</p>
+							<select id='pilihan' class='my-form' name="pilihan">
+								<option value="" disabled selected hidden>Pilih Kategori</option>
+								<option value="dokter">Dokter</option>
+								<option value="pasien">Pasien</option>
+							</select>
+				</div>
+				<div class="input-box">
+							<p>Sort By :</p>
+							<select id='pilihan' class='my-form' name="sort">
+								<option value="daftarDokter.nama">Dokter</option>
+								<option value="daftarPasien.nama">Pasien</option>
+								<option value="tanggal">Date</option>
+								<option value="isDeleted">dihapus</option>
+							</select>
+				</div>
+				<input type="radio" name="sortby" value="desc" checked> Menurun<br>
+					<input type="radio" name="sortby" value="asc"> Menaik<br>
+				<div class="container-menu-btn" style="width:">
+							<button class="menu-btn">
+								Cari
+							</button>
+				</div>
+				</form>
 			</div>
-			<div class="input-box">
-						<p>Sort By :</p>
-						<select id='pilihan' class='my-form' name="sort">
-							<option value="daftarDokter.nama">Dokter</option>
-							<option value="daftarPasien.nama">Pasien</option>
-							<option value="tanggal">Date</option>
-							<option value="isDeleted">dihapus</option>
-						</select>
-			</div>
-			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
-  			<input type="radio" name="sortby" value="asc"> Menaik<br>
-			<div class="container-menu-btn" style="width:">
-						<button class="menu-btn">
-							Cari
-						</button>
-					</div>
-			</fieldset>
-			</form>
 			<div class="my-container">
 				<table>
 					<tr>
