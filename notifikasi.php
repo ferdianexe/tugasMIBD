@@ -36,16 +36,18 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
-		<?php include ('navbar/admin-navmenu.php')?>	
+		<?php include ('navbar/admin-navmenu.php')?>
+		<div class='my-container centered-container'>
+		<label for="">Nama </label> 
 		<form method="GET" action="">
-			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
-			<div class="container-menu-btn" style="width:">
-						<button class="menu-btn">
-							Cari
-						</button>
-					</div>
-			</fieldset>
+			<input type="text" name="userID" id="" class='my-form'><br>
+			<div class="container-menu-btn">
+				<button class="menu-btn">
+					Cari
+				</button>
+			</div>
 			</form>
+		</div>
 		<div class="my-container">
 			<table class='table table-striped'>
 				<tr>

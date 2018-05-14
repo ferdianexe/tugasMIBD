@@ -47,26 +47,28 @@
 			exit();
 		}
 	?>
-	<form method="GET" action="">
-			<label for="">Nama </label> <input type="text" name="userID" id=""><br>
+	<div class='my-container centered-container'>
+	<label for="">Nama </label> 
+		<form method="GET" action="">
+			<input type="text" name="userID" id="" class='my-form'><br>
 			<div class="input-box">
-						<p>Sort By :</p>
-						<select id='pilihan' class='my-form' name="sort">
-							<option value="tusers.nama">Nama</option>
-							<option value="tusers.username">Username</option>
-							<option value="tspesial.namaSpesialisasi">Spesialisasi</option>
-							<option value="noRuangan">no Ruangan</option>
-						</select>
+				<p>Sort By :</p>
+				<select id='pilihan' class='my-form' name="sort">
+					<option value="tusers.nama">Nama</option>
+					<option value="tusers.username">Username</option>
+					<option value="tspesial.namaSpesialisasi">Spesialisasi</option>
+					<option value="noRuangan">no Ruangan</option>
+				</select>
 			</div>
 			<input type="radio" name="sortby" value="desc" checked> Menurun<br>
-  			<input type="radio" name="sortby" value="asc"> Menaik<br>
+				<input type="radio" name="sortby" value="asc"> Menaik<br>
 			<div class="container-menu-btn" style="width:">
-						<button class="menu-btn">
-							Cari
-						</button>
-					</div>
-			</fieldset>
-			</form>				
+				<button class="menu-btn">
+					Cari
+				</button>
+			</div>
+		</form>
+	</div>	
 	<div class="my-container">
 		<table>
 			<tr>

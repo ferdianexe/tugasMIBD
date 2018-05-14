@@ -15,8 +15,8 @@
 		<button class='dropbtn'>Statistik</button>
 		<div class='dropdown-content'>
 		<ul>
-			<li><a href="total-jam.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"total-jam.php")){echo 'class="active" ';}?>>Jam Kerja Dokter</a></li>
-			<li><a href="total-pasien.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"total-pasien.php")){echo 'class="active" ';}?>>Jumlah Pasien</a></li>
+			<li><a style='width:100%' href="total-jam.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"total-jam.php")){echo 'class="active" ';}?>>Jam Kerja Dokter</a></li>
+			<li><a style='width:100%' href="total-pasien.php" <?php if(stripos($_SERVER['SCRIPT_NAME'],"total-pasien.php")){echo 'class="active" ';}?>>Jumlah Pasien</a></li>
 			</ul>
 		</div>
 	</div>
