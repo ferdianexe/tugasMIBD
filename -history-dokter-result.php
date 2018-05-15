@@ -28,7 +28,7 @@
         $result= $conn->query($query);
         if ($result) {
             if (!mysqli_num_rows($result)) {
-                echo "<tr><td colspan=2>
+                echo "<tr><td colspan=4>
                   TIDAK ADA PASIEN YANG BERUSERNAME '$usrn'</td>
                     </tr>";
             }
