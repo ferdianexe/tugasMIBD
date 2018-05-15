@@ -61,12 +61,16 @@
 	</head>
 	<body>
 		<?php
-			include ('navbar/user-navbar.php'); 
+			include ('navbar/user-navbar.php');
+			if(isset($_GET['dokter'])){
+				include('-jadwal-dokter-userdetail.php');
+				exit();
+			}
 		?>
 		<div class="my-container centered-container">
 			<h3 style='padding-bottom:10px;'>Lihat Jadwal Praktek Dokter</h3>
 			<div>
-				<form method='POST' action="jadwal.php">
+				<form method='GET' action="jadwal.php">
 					<div class="input-box">
 						<p>Pilih Speciality</p>
 						<select id='specJadwal' class='my-form' name="speciality">
@@ -79,35 +83,10 @@
 							<option value="" disabled selected hidden>Pilih Dokter</option>
 						</select>
 					</div>
-					<div class="input-box">
-						<p>Pilih Hari</p>
-						<select id='hariJadwal' class='my-form' name="hari">
-							<option value="" disabled selected hidden>Pilih Hari</option>
-						</select>
-					</div>
 					<div class="container-menu-btn">
 						<button class="menu-btn">
 							Check !!
 						</button>
-					</div>
-					<div>
-						<h4>
-							<?php
-								if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-									if (isset($_POST['speciality']) && isset($_POST['dokter']) && isset($_POST['hari'])) {
-										if (!is_null($_POST['speciality']) && !is_null($_POST['dokter']) && !is_null($_POST['hari'])) {
-											echo 'Jadwal ditemukan !';
-										}
-										else {
-											echo 'Jadwal tidak Ditemukan';
-										}
-									}
-									else {
-										echo 'Jadwal tidak Ditemukan';
-									}
-								}
-							?>
-						</h4>
 					</div>
 				</form>
 			</div>

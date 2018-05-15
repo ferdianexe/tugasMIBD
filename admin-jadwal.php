@@ -62,11 +62,15 @@
 	<body>
 		<?php
 			include ('navbar/admin-navmenu.php'); 
+			if(isset($_GET['idktr'])){
+				include('-jadwal-dokter-details.php');
+				exit();
+			}
 		?>
 		<div class="my-container centered-container">
 			<h3 style='padding-bottom:10px;'>Lihat Jadwal Praktek Dokter</h3>
 			<div>
-				<form method='POST' action="admin-jadwal.php">
+				<form method='GET' action="admin-jadwal.php">
 					<div class="input-box">
 						<p>Pilih Speciality</p>
 						<select id='specJadwal' class='my-form' name="speciality">
@@ -75,14 +79,8 @@
 					</div>
 					<div class="input-box">
 						<p>Pilih Dokter</p>
-						<select id='dokterJadwal' class='my-form' name="dokter">
+						<select id='dokterJadwal' class='my-form' name="idktr">
 							<option value="" disabled selected hidden>Pilih Dokter</option>
-						</select>
-					</div>
-					<div class="input-box">
-						<p>Pilih Hari</p>
-						<select id='hariJadwal' class='my-form' name="hari">
-							<option value="" disabled selected hidden>Pilih Hari</option>
 						</select>
 					</div>
 					<div class="container-menu-btn">
@@ -91,23 +89,6 @@
 						</button>
 					</div>
 					<div>
-						<h4>
-							<?php
-								if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-									if (isset($_POST['speciality']) && isset($_POST['dokter']) && isset($_POST['hari'])) {
-										if (!is_null($_POST['speciality']) && !is_null($_POST['dokter']) && !is_null($_POST['hari'])) {
-											echo 'Jadwal ditemukan !';
-										}
-										else {
-											echo 'Jadwal tidak Ditemukan';
-										}
-									}
-									else {
-										echo 'Jadwal tidak Ditemukan';
-									}
-								}
-							?>
-						</h4>
 					</div>
 				</form>
 			</div>
@@ -140,19 +121,9 @@
 			});
 			$('#dokterJadwal').trigger('change');
 		});
-		var hari = $('#hariJadwal');
-		$('#dokterJadwal').on('change',function(){
-			$("#hariJadwal").empty();
-			var dataArray = arrDay[this.value];
-			$.each(dataArray,function(index,val){
-				hari.append($("<option/>").attr("value",val).text(mappingDay[val]));
-			});
-			console.log(dataArray);
-		});
 		var specMenu = $("#specJadwal");
 		$("#specJadwal option:gt(0)").empty();
 		$.each(arrSpeciality,function(index,value){
-			console.log('masuk');
 			if(index!=0){
 				if (value != null) {
 					specMenu.append($("<option/>").attr("value",index).text(value));
