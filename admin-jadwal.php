@@ -22,7 +22,7 @@
 		}
 		$allDokternSpeciality = "SELECT tusers.nama as nama, dokter.idDokter as idDokter, dokter.idSpesialisasi as spesialisasi
 								 FROM dokter
-								 inner join  users as tusers on tusers.idUser = dokter.idUser";
+								 inner join  users as tusers on isActive=1 AND tusers.idUser = dokter.idUser";
 		$check = $conn->query($allDokternSpeciality);
 		while($row = $check->fetch_array()){
 			$id = $row['spesialisasi'];

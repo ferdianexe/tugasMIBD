@@ -6,7 +6,7 @@
         $password = $_POST['password'];
         $query = "SELECT idUser,password,priviledge,nama,jenisKelamin
          FROM users 
-        WHERE username= '$username' ";
+        WHERE username= '$username' AND isActive=1";
         $result = $conn->query($query)->fetch_array();
         
         $_SESSION['namaUser'] = $result['nama'];
