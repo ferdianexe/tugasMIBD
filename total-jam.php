@@ -60,6 +60,11 @@
 	<body>
 			<?php include('navbar/admin-navmenu.php')?>
 			<div class='my-container centered-container'>
+				<div class='container-menu-btn'>
+					<button class='toggle-btn dropdown-btn menu-btn'>Show Search</button>
+				</div>
+			</div>
+			<div class='d-container my-container centered-container'>
 				<label for="">Nama </label>
 				<form method="GET" action="">
 					<input type="text" name="userID" id="" class='my-form'><br>
@@ -76,7 +81,6 @@
 			<div class="my-container">
 				<table>
 					<tr>
-						<th>idDokter</th>
 						<th>Dokter</th>
 						<th>Total Jam Perminggu</th>
 					</tr>
@@ -84,7 +88,6 @@
                         if ($result) {
                             while ($row=$result->fetch_array()) {
                                 echo "<tr>
-									<td>".$row['dokterID']."</td>
 									<td>".$row['nama']."</td>
 									";
 									if($row['totalJam']){
@@ -102,3 +105,5 @@
 		
 	</body>
 </html>
+
+<?php include('-dropdown-btn-script.html')?>

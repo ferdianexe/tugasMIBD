@@ -14,6 +14,8 @@
     <tr>
         <th>WAKTU TEMU</th>
         <th>CATATAN</th>
+        <th></th>
+        <th></th>
     </tr>
     <?php
         $usrn = $_GET['username'];
