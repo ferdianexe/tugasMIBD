@@ -30,16 +30,29 @@
 	</head>
 	<body>
 			<?php include('navbar/admin-navmenu.php')?>	
+			<?php
+				if (isset($_GET['id'])) {
+					if (!is_null($_GET['id'])) {
+						$id = $_GET['id'];
+						$query1 = "DELETE FROM spesialisasi WHERE idSpesialisasi='$id'";
+						$conn->query($query1);
+						echo mysqli_error($conn);
+						header("Location:addspesialisasi.php");
+					}
+				}
+			?>
 			<div class="my-container">
 				<table>
 					<tr>
 						<th>Nama Spesialisasi</th>
+						<th>Delete</th>
 					</tr>
 							<?php
                         if ($result) {
                             while ($row=$result->fetch_array()) {
                                 echo "<tr>
 									<td>".$row['namaSpesialisasi']."</td>
+									<td><a href=addspesialisasi.php?id=".$row['idSpesialisasi'].">Delete</a></td>
 									</tr>";
 							}
 						}
