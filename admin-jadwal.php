@@ -66,7 +66,7 @@
 		<div class="my-container centered-container">
 			<h3 style='padding-bottom:10px;'>Lihat Jadwal Praktek Dokter</h3>
 			<div>
-				<form method='POST' action="jadwal.php">
+				<form method='POST' action="admin-jadwal.php">
 					<div class="input-box">
 						<p>Pilih Speciality</p>
 						<select id='specJadwal' class='my-form' name="speciality">
