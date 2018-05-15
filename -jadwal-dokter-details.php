@@ -1,5 +1,6 @@
 <?php
-    //no need session : include from daftar-dokter.php 
+		//no need session : include from daftar-dokter.php 
+		include('-mapping-day.php');
     $idDokter = $_GET['idktr'];
     $query = "SELECT *
     FROM jadwalpraktek
@@ -10,7 +11,6 @@
 
 <table>
 	<tr>
-		<th>Jadwal</th>
 		<th>Hari</th>
 		<th>Jam awal </th>
 		<th>Jam Selesai</th>
@@ -19,8 +19,7 @@
 			if($result&&mysqli_num_rows($result)){
 					while($row=$result->fetch_array()){
 							echo "<tr>
-							<td> WTF </td>
-							<td>".$row['hari']."</td>
+							<td>".$mappingDay[$row['hari']]."</td>
 							<td>".$row['waktuMulai']."</td>
 							<td>".$row['waktuSelesai']."</td>
 							</tr>";

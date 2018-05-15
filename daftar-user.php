@@ -39,7 +39,12 @@
 	</head>
 	<body>
 		<?php include ('navbar/admin-navmenu.php')?>
-			<div class='my-container centered-container'>
+		<div class='my-container centered-container'>
+			<div class='container-menu-btn'>
+				<button class='toggle-btn dropdown-btn menu-btn'>Show Search</button>
+			</div>
+		</div>
+			<div class='d-container my-container centered-container'>
 				<label for="">Nama </label>
 				<form method="GET" action=""> 
 					<input type="text" name="userID" id="" class='my-form'><br>
@@ -93,3 +98,5 @@
 		</div>
 	</body>
 </html>
+
+<?php include('-dropdown-btn-script.html')?>

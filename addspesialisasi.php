@@ -33,14 +33,12 @@
 			<div class="my-container">
 				<table>
 					<tr>
-						<th>idSpesialisasi</th>
 						<th>Nama Spesialisasi</th>
 					</tr>
 							<?php
                         if ($result) {
                             while ($row=$result->fetch_array()) {
                                 echo "<tr>
-									<td>".$row['idSpesialisasi']."</td>
 									<td>".$row['namaSpesialisasi']."</td>
 									</tr>";
 							}

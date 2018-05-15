@@ -1,0 +1,14 @@
+<!-- reusable button script for search data :p -->
+<script>
+  var toggle = true;
+	$('.dropdown-btn').on('click', function() {
+		$('.d-container').slideToggle('slow');
+		if (toggle) {
+			$('.toggle-btn').text('Hide Search');
+		}
+		else {
+			$('.toggle-btn').text('Show Search');
+		}
+		toggle = !toggle;
+	})
+</script>
