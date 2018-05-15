@@ -1,6 +1,6 @@
 <?php
     include('connection/session.php');
-    $query = " SELECT nama,username,jenisKelamin,isActive,Alamat
+    $query = " SELECT idUser,nama,username,jenisKelamin,isActive,Alamat
 	FROM users
 	WHERE priviledge=1";
 	$filter="";
@@ -39,6 +39,20 @@
 	</head>
 	<body>
 		<?php include ('navbar/admin-navmenu.php')?>
+		<?php
+			if (isset($_GET['id']) && isset($_GET['s'])) {
+				if (!is_null($_GET['id']) && !is_null($_GET['s'])) {
+					($_GET['s'] == 1)?$val=0:$val=1;
+					$idUser = $_GET['id'];
+					echo $idUser;
+					echo $val;
+					$query1 = "UPDATE users SET isActive='$val' WHERE idUser='$idUser'";
+					$conn->query($query1);
+					echo mysqli_error($conn);
+					header("Location:daftar-user.php");
+				}
+			}
+		?>
 		<div class='my-container centered-container'>
 			<div class='container-menu-btn'>
 				<button class='toggle-btn dropdown-btn menu-btn'>Show Search</button>
@@ -72,6 +86,7 @@
 					<th>Jenis Kelamin</th>
 					<th>isActive</th>
 					<th>Alamat</th>
+					<th>Deaktivasi</th>
 				</tr>
 			<?php
 				while ($row=$result->fetch_array()) {
@@ -85,12 +100,21 @@
 						} else {
 								$status = "Aktif";
 						}
+						if ($row['isActive'] == 1) {
+							$x = "Deaktivasi";
+						}
+						else {
+							$x = "Aktivasi";
+						}
 						echo "<tr>
 						<td>". $row["nama"] ."</td>
 						<td> ".$row["username"] ."</td>
 						<td> ".$jenisKelamin."</td>
 						<td> ".$status."</td>
 						<td> ".$row["Alamat"]."</td>
+						<td> <a href=daftar-user.php?id=".$row["idUser"]."&s=".$row['isActive'].">".
+						$x
+						."</a></td>
 						";
 						}
 			?>

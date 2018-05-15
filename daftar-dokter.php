@@ -1,6 +1,10 @@
 <?php
 	include ('connection/session.php');
-	$query = " SELECT tusers.nama as nama ,tusers.username as username,tusers.jenisKelamin as jenisKelamin,tusers.Alamat as Alamat,tspesial.namaSpesialisasi as spesialisasi,noRuangan,idDokter
+	$map = [
+		"Tidak Aktif",
+		"Aktif"
+	];
+	$query = " SELECT tusers.nama as nama ,tusers.username as username,tusers.jenisKelamin as jenisKelamin,tusers.Alamat as Alamat,tspesial.namaSpesialisasi as spesialisasi,noRuangan,idDokter,isActive
 	FROM dokter 
 	INNER JOIN spesialisasi as tspesial on tspesial.idSpesialisasi = dokter.idSpesialisasi
 	INNER JOIN users as tusers on dokter.idUser = tusers.idUser ";
@@ -42,9 +46,31 @@
 	<body>
 	<?php include ('navbar/admin-navmenu.php')?>
 	<?php
-		if(isset($_GET['idktr'])){
-			include('-jadwal-dokter-details.php');
-			exit();
+		if(isset($_GET['idktr']) && !is_null($_GET['idktr'])){
+			$idDokter = $_GET['idktr'];
+			$selectUser = "SELECT idUser FROM dokter WHERE idDokter = '$idDokter'";
+			$resUser = $conn->query($selectUser);
+			$idUser = $resUser->fetch_array()['idUser'];
+			$getIsActiveQ = "SELECT isActive FROM users WHERE idUser = '$idUser'";
+			$isActive = $conn->query($getIsActiveQ)->fetch_array()['isActive'];
+			$queryDelete = "UPDATE users SET isActive = 0 WHERE idUser = '$idUser'";
+			$queryAddAgain = "UPDATE users SET isActive = 1 WHERE idUser = '$idUser'";
+			if (isset($_GET['pecat'])) {
+				if (!is_null($_GET['pecat'])) {
+					$pecat = $_GET['pecat'];
+					if ($pecat == 1) {
+						$conn->query($queryDelete);
+					}
+					else {
+						$conn->query($queryAddAgain);
+					}
+					header("Location:daftar-dokter.php?idktr=$idDokter");
+				}
+			}
+			else {
+				include('-jadwal-dokter-details.php');
+				exit();
+			}
 		}
 	?>
 	<div class='my-container centered-container'>
@@ -83,6 +109,7 @@
 				<th>No Ruangan</th>
 				<th>Alamat</th>
 				<th>Spesialisasi</th>
+				<th>Dokter Aktif?</th>
 				<th>Keterangan</th>
 			</tr>
 			<?php
@@ -101,6 +128,7 @@
 						<td> ".$row['noRuangan']."</td>
 						<td> ".$row["Alamat"]."</td>
 						<td> ".$row["spesialisasi"]."</td>
+						<td> ".$map[$row['isActive']]."</td>
 						<td> <a href=daftar-dokter.php?idktr=".$row['idDokter'].">DETAIL</a></td></tr>";
 					}
 				}
