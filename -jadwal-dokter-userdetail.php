@@ -4,7 +4,7 @@
     $idDokter = $_GET['dokter'];
     $query = "SELECT *
     FROM jadwalpraktek
-    WHERE idDokter = '$idDokter' AND isActive= 1
+    WHERE idDokter = '$idDokter'
     ";
     $result = $conn->query($query);
 ?>

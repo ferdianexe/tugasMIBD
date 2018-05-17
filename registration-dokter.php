@@ -12,7 +12,8 @@
                 $alamat = $_POST['Alamat'];
                 $password=$_POST['password'];
                 $noTelp = $_POST['telepon'];
-                $umur = $_POST['Umur'];
+								$umur = $_POST['Umur'];
+								$noRuangan = $_POST['noRuangan'];
                 $query = "INSERT INTO users(nama,jenisKelamin,priviledge,isActive,username,alamat,password,umur)
 					      VALUES ('$nama','$gender',2,1,'$username','$alamat','$password','$umur')";
                 $conn->query($query);
@@ -26,8 +27,8 @@
                 $query = "INSERT INTO nomortelepon(idUser,nomorTelp)
                           values ($idUser, '$noTelp')";
 				$conn->query($query);
-				$query = "INSERT INTO dokter(idUser,idSpesialisasi)
-						  VALUES ('$idUser','$speciality')
+				$query = "INSERT INTO dokter(idUser,idSpesialisasi, noRuangan)
+						  VALUES ('$idUser','$speciality', '$noRuangan')
 				";
 				$conn->query($query);
 				echo mysqli_error($conn);
@@ -92,6 +93,10 @@
 										}
 									?>
 								</select>
+							</div>
+							<div class="input-box">
+								<p>No Ruangan</p>
+								<input type="text" class='my-form' name="noRuangan" placeholder="No Ruangan">
 							</div>
 						</div>
 						<div class='my-column'>

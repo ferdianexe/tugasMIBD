@@ -29,11 +29,14 @@
           }
           header("Location:dokter-create.php");
           exit();
-      }
+	  }
+	$temp = $_SESSION['id'];
+	$query1 = "SELECT idDokter FROM dokter WHERE idUser = '$temp'";
+	$idDokter = $conn->query($query1)->fetch_array()['idDokter'];
     $orderQuery = "SELECT  users.nama as nama , users.username as username ,tOrder.idPenanganan as id 
 				   FROM (
 				  		SELECT idPasien,idPenanganan FROM `pekerjaandokter` 
-						WHERE waktuTemu = DATE_FORMAT(now(),'%Y-%m-%d') AND  sudahBertemu = 0
+						WHERE waktuTemu = DATE_FORMAT(now(),'%Y-%m-%d') AND  sudahBertemu = 0 AND idDokter = '$idDokter'
      					) as tOrder
 				 INNER JOIN users on users.idUser = tOrder.idPasien
 				";
